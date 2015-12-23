@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<project name="axis2-test" default="deploy">
+	<property name="top" location="." />
+	<property environment="env" />
+	<property file="${top}/build.properties" />
+	<property name="dir.lib.compile" value="${axis2.home}/lib" />
+	<property name="dir.lib.dependency" value="${top}/lib/dependency" />
+	<property name="dir.web" value="${top}/web-files" />
+	<property name="dir.config" value="${top}/config" />
+	<property name="dir.top.output" value="${top}/output" />
+	<property name="dir.output.dest.common" value="${top}/output/common/stage" />
+	<property name="dir.axis2.bin" value="${axis2.home}/bin" />
+	<property name="dir.deploy" value="${axis2.home}/repository/services" />
+	<property name="service.target.namespace.prefix" value="${service.target.namespace.prefix}" />
+
+	<path id="axis2.classes.compile">
+		<fileset dir="${dir.lib.compile}">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="${dir.lib.dependency}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+	<taskdef resource="net/sf/antcontrib/antlib.xml" classpathref="axis2.classes.compile" />
+	<target name="deploy">
+		<for list="${service.list}"
+		     param="service.current.name"
+		     delimiter="${service.list.delimeter}">
+			<sequential>
+				<echo message="Starting the deploy the Service @{service.current.name}" />
+				<ant inheritall="true"
+				     target="deploy"
+				     antfile="build.xml"
+				     dir="${top}/@{service.current.name}">
+					<reference refid="axis2.classes.compile" />
+					<property name="service.name" value="@{service.current.name}" />
+					<property name="service.package.prefix"
+					          value="${service.package.prefix}.@{service.current.name}" />
+					<property name="service.target.namespace.prefix"
+					          value="${service.target.namespace.prefix}/@{service.current.name}" />
+					<property name="dir.src.main" value="${top}/@{service.current.name}/src/main" />
+					<property name="dir.src.test" value="${top}/@{service.current.name}/src/test" />
+					<property name="dir.output" value="${dir.top.output}/@{service.current.name}" />
+				</ant>
+				<echo message="Deployed the Service @{service.current.name}" />
+			</sequential>
+		</for>
+	</target>
+	<target name="rebuild">
+		<for list="${service.list}"
+		     param="service.current.name"
+		     delimiter="${service.list.delimeter}">
+			<sequential>
+				<echo message="Starting the deploy the Service @{service.current.name}" />
+				<ant inheritall="true"
+				     target="rebuild"
+				     antfile="build.xml"
+				     dir="${top}/@{service.current.name}">
+					<reference refid="axis2.classes.compile" />
+					<property name="service.name" value="@{service.current.name}" />
+					<property name="service.package.prefix"
+					          value="${service.package.prefix}.@{service.current.name}" />
+					<property name="service.target.namespace.prefix"
+					          value="${service.target.namespace.prefix}/@{service.current.name}" />
+					<property name="dir.src.main" value="${top}/@{service.current.name}/src/main" />
+					<property name="dir.src.test" value="${top}/@{service.current.name}/src/test" />
+					<property name="dir.output" value="${dir.top.output}/@{service.current.name}" />
+				</ant>
+				<echo message="Rebuilded the Service @{service.current.name}" />
+			</sequential>
+		</for>
+	</target>
+
+	<!-- ================================= 
+		          target: clear              
+		         ================================= -->
+	<target name="clean" description="--> description">
+		<delete dir="${dir.output.dest}" />
+		<delete dir="${dir.output.src}" />
+		<delete dir="${dir.output.stage}" />
+		<delete dir="${dir.output}/${app.name}.aar" />
+	</target>
+	<target name="clean-stage-class" description="clean-stage-class">
+		<delete dir="${dir.output.dest}" />
+		<delete dir="${dir.output.src}" />
+	</target>
+</project>

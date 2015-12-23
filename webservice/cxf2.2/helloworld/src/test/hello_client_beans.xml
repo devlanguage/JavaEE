@@ -1,0 +1,20 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://cxf.apache.org/jaxws http://cxf.apache.org/schema/jaxws.xsd">
+
+	<bean id="client.HelloService" class="org.cxftest.hello.HelloService" factory-bean="clientFactory.HelloService" factory-method="create" />
+	<bean id="clientFactory.HelloService" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+		<property name="serviceClass" value="org.cxftest.hello.HelloService" />
+		<property name="address" value="http://localhost:8080/test/HelloService" />
+	</bean>
+
+	<bean id="client.UserService" class="org.cxftest.user.UserService" factory-bean="clientFactory.UserService" factory-method="create" />
+	<bean id="clientFactory.UserService" class="org.apache.cxf.jaxws.JaxWsProxyFactoryBean">
+		<property name="serviceClass" value="org.cxftest.user.UserService" />
+		<property name="address" value="http://localhost:8080/test/UserService" />
+	</bean>
+	
+	<bean id="test_01" class="org.cxftest.user.vo.UserVo" factory-bean="userManager" factory-method="createUser" />
+	<bean id="userManager" class="org.cxftest.user.dao.UserManager"></bean>
+
+</beans>

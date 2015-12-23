@@ -1,0 +1,217 @@
+<?xml version="1.0"?>
+<!DOCTYPE ejb-jar PUBLIC "-//Sun Microsystems, Inc.//DTD Enterprise JavaBeans 2.0//EN"
+                         "http://java.sun.com/dtd/ejb-jar_2_0.dtd">
+<!-- (description?, display-name?, small-icon?, large-icon?, enterprise-beans, 
+	relationships?, assembly-descriptor?, ejb-client-jar?) -->
+<ejb-jar>
+	<enterprise-beans>
+		<session>
+			<ejb-name>EmployeeService</ejb-name>
+			<home>org.ejbtest.v2.stateless.EmployeeServiceHome</home>
+			<remote>org.ejbtest.v2.stateless.EmployeeService</remote>
+			<ejb-class>org.ejbtest.v2.stateless.EmployeeServiceBean</ejb-class>
+			<session-type>Stateless</session-type>
+			<transaction-type>Container</transaction-type>
+		</session>
+		<!-- The content of element type "entity" must match "(description?,display-name?,small-icon?,large-icon?,ejb- 
+			name,home?,remote?,local-home?,local?,ejb-class,persistence-type,prim-key-class,reentrant,cmp- 
+			version?,abstract-schema-name?,cmp-field*,primkey-field?,env-entry*,ejb-ref*,ejb-local-ref*,security-role- 
+			ref*,security-identity?,resource-ref*,resource-env- ref*,query*)". -->
+		<entity>
+			<description>Entity Bean</description>
+			<display-name>Employee Entity Bean</display-name>
+			<small-icon>7310.PNG</small-icon>
+			<large-icon>7305.PNG</large-icon>
+			<ejb-name>ejb/Employee/remote</ejb-name>
+			<home>org.ejbtest.v2.entity.EmployeeHome</home>
+			<remote>org.ejbtest.v2.entity.Employee</remote>
+			<ejb-class>org.ejbtest.v2.entity.EmployeeBean</ejb-class>
+			<persistence-type>Bean</persistence-type>
+			<prim-key-class>java.lang.Long</prim-key-class>
+			<reentrant>true</reentrant>
+			<cmp-version>2.x</cmp-version>
+			<cmp-field>
+				<field-name>name</field-name>
+			</cmp-field>
+			<primkey-field>employeeId</primkey-field>
+			<ejb-ref>
+				<description>ejb/Employee/remote</description>
+				<ejb-ref-name>ejb/Employee/remote</ejb-ref-name>
+				<ejb-ref-type>Entity</ejb-ref-type>
+				<home>org.ejbtest.v2.entity.EmployeeHome</home>
+				<remote>org.ejbtest.v2.entity.Employee</remote>
+				<!-- ejbtest.jar#ejb/Employee/remote -->
+				<ejb-link>ejb/Employee/remote</ejb-link>
+			</ejb-ref>
+			<security-role-ref>
+				<role-name>Admin</role-name>
+			</security-role-ref>
+		</entity>
+
+		<entity>
+			<display-name>UserInfoBean</display-name>
+			<ejb-name>UserInfoBean</ejb-name>
+			<local-home>org.ejbtest.v2.entity.LocalUserInfoHome</local-home>
+			<local>org.ejbtest.v2.entity.LocalUserInfo</local>
+			<ejb-class>org.ejbtest.v2.entity.UserInfoBean</ejb-class>
+			<persistence-type>Container</persistence-type>
+			<prim-key-class>java.lang.String</prim-key-class>
+			<reentrant>true</reentrant>
+			<cmp-version>2.x</cmp-version>
+			<abstract-schema-name>UserInfoBean</abstract-schema-name>
+			<cmp-field>
+				<field-name>firstName</field-name>
+			</cmp-field>
+
+			<cmp-field>
+				<field-name>middleName</field-name>
+			</cmp-field>
+
+			<cmp-field>
+				<field-name>lastName</field-name>
+			</cmp-field>
+
+			<cmp-field>
+				<field-name>email</field-name>
+			</cmp-field>
+
+			<cmp-field>
+				<field-name>dept</field-name>
+			</cmp-field>
+
+			<cmp-field>
+				<field-name>workPhone</field-name>
+			</cmp-field>
+
+			<cmp-field>
+				<field-name>extention</field-name>
+			</cmp-field>
+
+			<cmp-field>
+				<field-name>homePhone</field-name>
+			</cmp-field>
+
+			<cmp-field>
+				<field-name>employee</field-name>
+			</cmp-field>
+
+			<cmp-field>
+				<field-name>email</field-name>
+			</cmp-field>
+
+			<primkey-field>email</primkey-field>
+		</entity>
+		<entity>
+			<display-name>UserBean</display-name>
+			<ejb-name>UserBean</ejb-name>
+			<local-home>org.ejbtest.v2.entity.LocalUserHome</local-home>
+			<local>org.ejbtest.v2.entity.LocalUser</local>
+			<ejb-class>org.ejbtest.v2.entity.UserBean</ejb-class>
+			<persistence-type>Container</persistence-type>
+			<prim-key-class>java.lang.Long</prim-key-class>
+			<reentrant>true</reentrant>
+			<cmp-version>2.x</cmp-version>
+			<abstract-schema-name>UserBean</abstract-schema-name>
+			<cmp-field>
+				<field-name>email</field-name>
+			</cmp-field>
+			<cmp-field>
+				<field-name>password</field-name>
+			</cmp-field>
+			<cmp-field>
+				<field-name>userId</field-name>
+			</cmp-field>
+			<primkey-field>userId</primkey-field>
+		</entity>
+		<entity>
+			<display-name>RoleBean</display-name>
+			<ejb-name>RoleBean</ejb-name>
+			<local-home>org.ejbtest.v2.entity.LocalRoleHome</local-home>
+			<local>org.ejbtest.v2.entity.LocalRole</local>
+			<ejb-class>org.ejbtest.v2.entity.RoleBean</ejb-class>
+
+			<persistence-type>Container</persistence-type>
+			<prim-key-class>java.lang.String</prim-key-class>
+			<reentrant>false</reentrant>
+			<cmp-version>2.x</cmp-version>
+			<abstract-schema-name>RoleBean</abstract-schema-name>
+
+			<cmp-field>
+				<description>no description</description>
+				<field-name>name</field-name>
+			</cmp-field>
+			<cmp-field>
+				<description>no description</description>
+				<field-name>description</field-name>
+			</cmp-field>
+			<primkey-field>name</primkey-field>
+			<security-identity>
+				<description></description>
+				<use-caller-identity></use-caller-identity>
+			</security-identity>
+
+			<query>
+				<description></description>
+				<query-method>
+					<method-name>findAll</method-name>
+					<method-params />
+				</query-method>
+				<ejb-ql>select Object(o) from RoleBean </ejb-ql>
+			</query>
+
+		</entity>
+		<!-- Content Model : (description?, display-name?, small-icon?, large-icon?, 
+			ejb-name, ejb-class, transaction-type, message-selector?, acknowledge-mode?, 
+			message-driven-destination?, env-entry*, ejb-ref*, ejb-local-ref*, security-identity?, 
+			resource-ref*, resource-env-ref*) -->
+		<message-driven>
+			<ejb-name>ejb/EmployeeMdb/remote</ejb-name>
+			<ejb-class>org.ejbtest.v2.mdb.EmployeeMdb</ejb-class>
+			<transaction-type>Container</transaction-type><!-- <message-selector>JMSType 
+				= 'car' AND color = 'blue' AND weight &gt; 2500 </message-selector> -->
+			<acknowledge-mode>AUTO_ACKNOWLEDGE</acknowledge-mode>
+			<message-driven-destination>
+				<destination-type>javax.jms.Queue</destination-type>
+			</message-driven-destination>
+			<resource-ref>
+				<res-ref-name>jms/QueueConnectionFactory</res-ref-name>
+				<res-type>javax.jms.QueueConnectionFactory</res-type>
+				<res-auth>Container</res-auth>
+			</resource-ref>
+		</message-driven>
+	</enterprise-beans>
+	<!--<relationships> <ejb-relation> <ejb-relation-name>UserHasUserInfo</ejb-relation-name> 
+		<ejb-relationship-role> <ejb-relationship-role-name>UserHasUserInfo</ejb-relationship-role-name> 
+		<multiplicity>One</multiplicity> <relationship-role-source> <ejb-name>UserBean</ejb-name> 
+		</relationship-role-source> <cmr-field> <cmr-field-name>userInfo</cmr-field-name> 
+		</cmr-field> </ejb-relationship-role> <ejb-relationship-role> <ejb-relationship-role-name>UserInfoPartOfUser</ejb-relationship-role-name> 
+		<multiplicity>One</multiplicity> <cascade-delete /> <relationship-role-source> 
+		<ejb-name>UserInfoBean</ejb-name> </relationship-role-source> <cmr-field> 
+		<cmr-field-name>user</cmr-field-name> </cmr-field> </ejb-relationship-role> 
+		</ejb-relation> </relationships> --><!-- The content of element type "assembly-descriptor" must match "(security-role*,method- 
+		permission*,container-transaction*,exclude-list?)". -->
+	<assembly-descriptor>
+		<security-role>
+			<role-name>Admin</role-name>
+		</security-role>
+		<security-role>
+			<role-name>Operator</role-name>
+		</security-role>
+		<method-permission>
+			<role-name>Admin</role-name>
+			<method>
+				<ejb-name>ejb/Employee/remote</ejb-name>
+				<method-name>*</method-name>
+			</method>
+		</method-permission>
+		<container-transaction>
+			<method>
+				<ejb-name>EmployeeService</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<!-- NotSupported Supports Required RequiresNew Mandatory Never -->
+			<trans-attribute>Required</trans-attribute>
+		</container-transaction>
+	</assembly-descriptor>
+
+</ejb-jar>

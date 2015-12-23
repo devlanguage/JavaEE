@@ -1,0 +1,50 @@
+Example 1: One-to-one association that maps a foreign key column
+
+    On Customer class:
+
+    @OneToOne(optional=false)
+    @JoinColumn(
+        name="CUSTREC_ID", unique=true, nullable=false, updatable=false)
+    public CustomerRecord getCustomerRecord() { return customerRecord; }
+
+    On CustomerRecord class:
+
+    @OneToOne(optional=false, mappedBy="customerRecord")
+    public Customer getCustomer() { return customer; }
+
+Example 2: One-to-one association that assumes both the source and target share the same primary key values. 
+
+    On Employee class:
+
+    @Entity
+    public class Employee {
+        @Id Integer id;
+    
+        @OneToOne @PrimaryKeyJoinColumn
+        EmployeeInfo info;
+        ...
+    }
+
+    On EmployeeInfo class:
+
+    @Entity
+    public class EmployeeInfo {
+        @Id Integer id;
+        ...
+    }
+    
+CascadeType[] cascade: (Optional) The operations that must be cascaded to the target of the association. 
+	ALL           Cascade all operations 
+	MERGE         Cascade merge operation 
+	PERSIST       Cascade persist operation 
+	REFRESH       Cascade refresh operation 
+	REMOVE        Cascade remove operation 
+	
+FetchType fetch:       (Optional) Whether the association should be lazily loaded or must be eagerly fetched. 
+	EAGER         Defines that data must be eagerly fetched 
+	LAZY          Defines that data can be lazily fetched 
+	
+String mappedBy :     (Optional) The field that owns the relationship. 
+boolean optional:    (Optional) Whether the association is optional. 
+Class targetEntity : (Optional) The entity class that is the target of the association. 
+    

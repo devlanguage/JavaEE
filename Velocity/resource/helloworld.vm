@@ -1,0 +1,27 @@
+<HTML>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+<BODY>
+单行注释以两个#号开头开始，并在本行结束。
+如果需要加入多行注释，并不需要加入很多的单行注释。多行注释，以# * 开始并以* #结束可以处理这种情况。
+还有第三种注释，# ** VTL 注释块，可以用来存储诸如文档作者、版本信息等。*#
+属性$customer.Address 具有和方法$customer.getAddress()  完全一样的效果
+
+\$customerList=$customerList
+\${customerList}=${customerList}
+\$customer.getName()=Hello $customer.getName()
+<table>
+#foreach( $customer1 in $customerList )
+       #if ($customer1.getId()<30000)
+          #set($customer2 = "id<30000: $customer1" )
+       #elseif($customer1.getId()<70000)
+          #set($customer2 = "id<70000: $customer1")
+       #else
+          #set($customer2 = "id>=70000: $customer1" )
+       #end 
+      <tr>
+        <td>
+       \$customer2=${customer2}
+        </td> 
+      </tr>            
+#end
+</table>

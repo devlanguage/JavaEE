@@ -1,0 +1,16 @@
+<S:Envelope xmlns:S="http://www.w3.org/2001/12/soap-envelope">
+	<S:Header>
+		<wscoor:CoordinationContext xmlns:wsme="http://www.w3.org/2002/06/msgext"
+			xmlns:wscoor=http://www.w3.org/2002/06/Coordination xmlns:myApp="http://www.w3.org/2002/06/myApp">
+			<wsme:Identifier>http://foobaz.com/SS/1234</wsme:Identifier>
+			<wsme:Expires>2002-06-30T13:20:00.000-05:00</wsme:Expires>
+			<wscoor:CoordinationType>http://xml-soap.org/2002/06/AtomicTransaction</wscoor:CoordinationType>
+			<wscoor:RegistrationService>
+				<Address>http://myservice.com/mycoordinationservice/registration</Address>
+				<myApp:BetaMark>...</myApp:BetaMark>
+				<myApp:EBDCode>...</myApp:EBDCode>
+			</wscoor:RegistrationService>
+			<myApp:IsolationLevel>RepeatableRead</myApp:IsolationLevel>
+		</wscoor:CoordinationContext>
+	</S:Header>
+</S:Envelope>

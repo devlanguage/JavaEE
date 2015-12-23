@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<project name="cxf java2ws" basedir=".">
+	<property file="./cxftest_config.properties" />
+
+	<path id="cxf.classpath">
+		<fileset dir="${cxf.home}/lib">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<target name="cxfJavaToWS">
+		<!--
+ java2ws -databinding <jaxb or aegis> -frontend <jaxws or simple> -wsdl -wrapperbean -client -server -ant
+           -o <output-file> -d <resource-directory> -classdir <compile-classes-directory> -cp <class-path> 
+           -soap12 -t <target-namespace> -beans <ppathname of the bean definition file>* 
+           -servicename <service-name> -portname <port-name> -createxsdimports -h -v -verbose -quiet {classname}
+==============================================
+Option  Interpretation  
+==============================================
+-?		Displays the online help for this utility.  
+-help  	
+-h  
+-o  	Specifies the name of the generated WSDL file.  
+-databinding Specify the data binding (aegis or jaxb). Default is jaxb for jaxws frontend, and aegis for simple frontend. 
+-frontend Specify the frontend to use. jaxws and the simple frontend are supported. 
+-wsdl 	Specify to generate the WSDL file. 
+-wrapperbean Specify to generate the wrapper and fault bean 
+-client Specify to generate client side code 
+-server Specify to generate server side code 
+-ant 	Specify to generate an Ant build.xml script 
+-cp  	Specify the SEI and types class search path of directories and zip/jar files.  
+-soap12 Specifies that the generated WSDL is to include a SOAP 1.2 binding.  
+-t  	Specifies the target namespace to use in the generated WSDL file.  
+-servicename  Specifies the value of the generated service element's name attribute.  
+-v  	Displays the version number for the tool.  
+-verbose  Displays comments during the code generation process.  
+-quiet  Suppresses comments during the code generation process.  
+-s  	The directory in which the generated source files(wrapper bean ,fault bean ,client side or server side code) are placed. 
+-classdir  The directory in which the generated sources are compiled into. If not specified, the files are not compiled.  
+-portname Specify the port name to use in the generated wsdl.  
+-createxsdimports Output schemas to separate files and use imports to load them instead of inlining them into the wsdl.  
+-d  	The directory in which the resource files are placed, wsdl file will be placed into this directory by default 
+classname  Specifies the name of the SEI class.  
+
+-->
+		<java classname="org.apache.cxf.tools.java2ws.JavaToWS" fork="true">
+			<arg value="-wsdl" />
+			<arg value="-o" />
+			<arg value="hello.wsdl" />
+			<arg value="service.Greeter" />
+			<classpath>
+				<path refid="cxf.classpath" />
+			</classpath>
+		</java>
+	</target>
+	
+	<target name="cxfJavaToWSDL">
+		<!--
+java2wsdl [-?|-help|-h][-o <output-file>][-cp <class-path>][-soap12][-t <target-namespace>][-servicenam <seservice-name>][-v][-verbose|-quiet][-s <source-directory>]
+          [-classdir <compile-classes-directory>][-portname <port-name>][-createxsdimports][-d <output-directory>] { classname }
+          
+java2wsdl org.apache.hello_world_soap_http.Greeter 
+java2wsdl -cp ./tmp org.apache.hello_world_soap_http.Greeter 
+java2wsdl -o hello.wsdl org.apache.hello_world_soap_http.Greeter 
+java2wsdl -o hello.wsdl -t http://cxf.apache.org org.apache.hello_world_soap_http.Greeter
+          
+==============================================
+Option  Interpretation  
+==============================================
+-?  	Displays the online help for this utility.  
+-help  
+-h  
+-o  	Specifies the name of the generated WSDL file.  
+-cp  	Specify the SEI and types class search path of directories and zip/jar files.  
+-soap12 Specifies that the generated WSDL is to include a SOAP 1.2 binding.  
+-t  	Specifies the target namespace to use in the generated WSDL file.  
+-servicename  Specifies the value of the generated service element's name attribute.  
+-v  	Displays the version number for the tool.  
+-verbose  Displays comments during the code generation process.  
+-quiet  Suppresses comments during the code generation process.  
+-s  	The directory in which the generated source files are placed, mostly in jaxws mode, it will generate the wrapper beans and fault beans  
+-classdir  The directory in which the generated sources are compiled into. If not specified, the files are not compiled.  
+-portname Specify the port name to use in the generated wsdl.  
+-createxsdimports Output schemas to separate files and use imports to load them instead of inlining them into the wsdl.  
+-d  	The directory in which the output files are placed.  
+classname  Specifies the name of the SEI class. Note this is the compiled class, not a reference to its source file.  
+
+
+	-->		
+	      <java classname="org.apache.cxf.tools.java2wsdl.JavaToWSDL" fork="true">
+	         <arg value="-o"/>
+	         <arg value="hello.wsdl"/>
+	         <arg value="service.Greeter"/>
+	         <classpath>
+	            <path refid="cxf.classpath"/>
+	         </classpath>
+	      </java>
+	   </target>
+	
+</project>

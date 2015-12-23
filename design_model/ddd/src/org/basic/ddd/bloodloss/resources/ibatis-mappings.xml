@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<cacheModel id="account_cache_model" type="LRU">
+		<!-- In the above example, a cache is defined for products that uses a 
+			WEAK reference type and flushes every 3 seconds or whenever associated update 
+			statements are executed. -->
+		<flushInterval hours="0" milliseconds="0" minutes="0"
+			seconds="3" />
+		<flushOnExecute statement="insertAccount" />
+		<flushOnExecute statement="updateAccount" />
+		<flushOnExecute statement="deleteAccount" />
+	</cacheModel>
+	<typeAlias alias="Account" type="org.basic.ddd.bloodloss.model.Account" />
+	<typeAlias alias="TransferTransaction"
+		type="org.basic.ddd.bloodloss.model.TransferTransaction" />
+
+	<parameterMap id="Parameter_Class_Account"
+		class="org.ibatistest.account.domain.persistence.Account_Map">
+		<parameter property="accountID" jdbcType="VARCHAR" mode="IN" />
+		<parameter property="accountName" jdbcType="VARCHAR" mode="INOUT" />
+		<parameter property="accountID" />
+	</parameterMap>
+	<parameterMap id="Parameter_Map_Account" class="java.util.Map"><!-- java.util.Map 
+			也可以使用map替代 -->
+		<parameter property="accountID" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="accountName" jdbcType="VARCHAR" mode="IN" nullValue="default_account_name" />
+	</parameterMap>
+
+	<insert id="insertAccountByParameterClass" parameterClass="Account">
+		insert into ddd_account(id, account_id, account_name)
+		   values(ddd_seq_account.nextval, #accountId#, #accountName#)
+	</insert>
+	<insert id="insertAccountByParameterMap" parameterMap="Parameter_Map_Account">
+        insert into ddd_account(id, account_id, account_name)
+           values(ddd_seq_account.nextval, ?, ?)
+    </insert>
+    
+	<delete id="deleteAllAccountById" parameterClass="int">
+		delete from
+		ddd_account 
+	</delete>
+	<select id="getAllAccounts"></select>
+	<update id="updateAccountId"></update>
+	<procedure id="updateAccountNameById" parameterMap="Parameter_Map_Account">
+	</procedure>
+	<statement id="deleteAllAccount">
+	   delete from ddd_account
+	</statement>
+</sqlMap>

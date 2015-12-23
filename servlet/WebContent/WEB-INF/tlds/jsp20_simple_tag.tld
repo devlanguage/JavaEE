@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+	version="2.1">
+	<!--
+		Element : taglib The taglib tag is the document root. The definition of taglib is provided by the tldTaglibType.
+		Content Model : (((description*, display-name*, icon*)), tlib-version, short-name, uri?, validator?, listener*, tag*,
+		tag-file*, function*, taglib-extension*)
+	-->
+	<tlib-version>2.0</tlib-version>
+  <!-- valid just for "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd"
+    <jsp-version>2.0</jsp-version>
+  -->
+	<short-name>simple</short-name>
+	<uri>http://servlettest.org/simple</uri>
+	<!--
+		Element : tag Content Model : (((description*, display-name*, icon*)), name, tag-class, tei-class?, body-content,
+		variable*, attribute*, dynamic-attributes?, example?, tag-extension*)
+	-->
+	<tag>
+		<description>JSP2.0 javax.servlet.jsp.tagext.SimpleTagSupport Test</description>
+		<name>Add</name>
+		<tag-class>org.basic.servlet.taglib.simpletag_jsp20.AddSimpleTag 
+		</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>num1</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>num2</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<description>Simple Tag: attribute fragment test: javax.servlet.jsp.tagext.JspFragment</description>
+		<name>FragmentAttr_SimpleTag</name>
+		<tag-class>org.basic.servlet.taglib.simpletag_jsp20.FragmentAttr_SimpleTag 
+		</tag-class>
+		<!-- tagdependent JSP  empty   -->
+		<body-content>empty</body-content>
+		<attribute>
+			<name>count</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			
+		</attribute>
+		<attribute>
+			<name>fragment</name>
+			<required>true</required>
+			<fragment>true</fragment>
+		</attribute>
+		<example>The example element contains an informal description of an example of the use of a tag.</example>
+	</tag>
+<tag>
+	<description></description>
+	<name>DynAttribute_SimpleTag</name>
+	<tag-class>org.basic.servlet.taglib.simpletag_jsp20.DynAttribute_SimpleTag 
+	</tag-class>
+	<body-content>empty</body-content>
+	<dynamic-attributes>true</dynamic-attributes>
+</tag>
+</taglib>

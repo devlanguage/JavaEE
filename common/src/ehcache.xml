@@ -1,0 +1,23 @@
+<ehcache>
+
+	<diskStore path="java.io.tmpdir" />
+
+
+	<defaultCache maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="120"
+
+		overflowToDisk="true" />
+
+
+	<cache name="goncha.hb.bean.Person" maxElementsInMemory="10" eternal="false" timeToIdleSeconds="100"
+
+		timeToLiveSeconds="100" overflowToDisk="false" />
+
+
+	<cache name="goncha.hb.bean.Address" maxElementsInMemory="10" eternal="false" timeToIdleSeconds="100"
+
+		timeToLiveSeconds="100" overflowToDisk="false" />
+
+
+</ehcache> 
+
+

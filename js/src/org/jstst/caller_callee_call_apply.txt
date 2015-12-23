@@ -1,0 +1,97 @@
+全面理解 caller，callee，call，apply2007-06-15 12:381、caller 
+JScript参考中说明为：返回一个对函数的引用，该函数调用了当前函数。如何理解这句话, 先来举个简单的例子： 
+// caller demo
+<script>     
+function callerDemo() {
+ if (callerDemo.caller) {
+     var a= callerDemo.caller.toString();
+     alert(a);
+ } else {
+     alert("this is a top function");
+ }
+}
+function handleCaller() {
+ callerDemo();
+}
+callerDemo();     
+</script>  
+对于函数来说，caller 属性只有在函数执行时才有定义。如果函数是由 JScript 程序的顶层调用的，那么 caller 包含的就是 null 。
+上面的例子，可以看出，它就是返回一个调用数据的引用。(指向请求调用的函数) 也由此可以看出，当在这样的情况下，onclick触发事件的时候总是带着匿名函数的 
+2、callee 
+JScript参考中的说明为：返回正被执行的 Function 对象，也就是所指定的 Function 对象的正文。
+需要注意的是callee拥有length属性，这个在有的时候用于验证还是比较好的。
+
+function calleeDemo() {
+ alert(arguments.callee);
+}
+function calleeLengthDemo(arg1, arg2) {
+ if (arguments.length==arguments.callee.length) {
+   window.alert("验证形参和实参长度正确！");
+   return;
+ } else {
+   alert("实参长度：" +arguments.length);
+   alert("形参长度： " +arguments.callee.length);
+ }
+}
+   
+从上面的例子可以看出，callee可以用来打在执行函数，也就是指向被调用的函数。上面的例子就说明calee可以打印其本身，当然还有其它的一些用途。而length属性中arguments.length是实参长度，arguments.callee.length是形参长度，由此可以判断调用时形参长度是否和实参长度一致。
+3、call 和 apply
+call方法JScript参考中的说明：调用一个对象的一个方法，以另一个对象替换当前对象。call([thisObj[,arg1[, arg2[, [,.argN]]]]])，但是没有示例 
+apply方法JScript参考中的说明：应用某一对象的一个方法，用另一个对象替换当前对象。apply([thisObj[,argArray]]) 
+实际上这两个的作用几乎是相同的，要注意的地方是call(thisObj[,arg1[, arg2[,)中的arg参数可以是变量，而apply([thisObj[,argArray]])中的参数为数组集合。下面来看看call, apply的具体应用 
+// simple call demo
+function simpleCallDemo(arg) {
+ window.alert(arg);
+}
+function handleSPC(arg) {
+ simpleCallDemo.call(this, arg);
+}
+// simple apply demo
+function simpleApplyDemo(arg) {
+ window.alert(arg);
+}
+function handleSPA(arg) {
+ simpleApplyDemo.apply(this, arguments);
+}
+   
+从上面简单的例子可以看出，call和apply可以把当前的参数传递给另外一个函数的参数中，从而调用另一个函数的应用。有的时候这是一个很实用的方法，当然，用call或是apply（是参数或是数组），看实际情况而定了。 
+下面来看另一个应用 
+call和apply还有一个技巧在里面，就是用call和apply应用另一个函数（类）以后，当前的函数（类）就具备了另一个函数（类）的方法或者是属性，这也可以称之为“继承”。看下面示例。 
+// inherit
+function base() {
+ this.member = "never-online";
+ this.method = function() {
+  window.alert(this.member);
+ }
+}
+function extend() {
+ base.call(this);
+ window.alert(member);
+ window.alert(this.method);
+}
+ 
+上面的例子可以看出，通过call之后，extend可以继承到base的方法和属性。 
+再看一个apply的应用 
+// advanced apply demo
+function adApplyDemo(x) {
+ return ("this is never-online, BlueDestiny '" + x + "' demo");
+}
+function handleAdApplyDemo(obj, fname, before) {
+   var oldFunc = obj[fname];
+   obj[fname] = function() {
+     return oldFunc.apply(this, before(arguments));
+   };
+}
+function hellowordFunc(args) {
+   args[0] = "hello " + args[0];
+   return args;
+}
+function applyBefore() {
+ alert(adApplyDemo("world"));
+}
+function applyAfter() {
+ handleAdApplyDemo(this, "adApplyDemo", hellowordFunc);
+ alert(adApplyDemo("world")); // Hello world!
+}
+ 
+需要注意的是，要先点"原始的adApplyDemo('world')"按钮，如果先点"应用后的adApplyDemo('world')"按扭，会先应用了apply方法，这样原始的值将会被改变。或许有的朋友没有发现有什么特别的，我在这里指明一下，当点击左边的按扭时，只有"this is never-online, BlueDestiny 'world' demo"， 当点击右边的按扭后，会现结果是"this is never-online, BlueDestiny 'hello world' demo"，再点点左边的按扭，看看结果又会是什么呢？自己试试看:D，已经改写了函数adApplyDemo。这个例子则说明了call和apply的“真正”作用了。    

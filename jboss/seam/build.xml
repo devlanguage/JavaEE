@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     2010-7-6 下午02:00:45                                                        
+
+     jboss_test    
+     description
+                   
+     ygong                                                                
+     ====================================================================== -->
+<project name="jboss_test" default="run">
+	<description>
+            description
+    </description>
+	<property name="jboss.home" value="C:/software/App_Server/jboss-5.1.0.GA" />
+	<property name="dest.dir" value="app.war/WEB-INF/classes" />
+	<property name="src.dir" value="src" />
+	<path id="build.classpath">
+		<fileset dir="${jboss.home}/client">
+			<include name="*.jar" />
+		</fileset>
+		<pathelement location="${dest.dir}" />
+	</path>
+	<!-- ================================= 
+          target: run              
+         ================================= -->
+	<target name="run" depends="init" description="description">
+
+		<javac destdir="${dest.dir}"
+		       srcdir="${src.dir}"
+		       verbose="true"
+		       fork="true"
+		       optimize="true"
+		       includes="**/*.*"
+		       debug="true"
+		       debuglevel="lines,vars,source">
+			<classpath refid="build.classpath" />
+		</javac>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: init                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="init">
+		<mkdir dir="${dest.dir}" />
+	</target>
+
+</project>

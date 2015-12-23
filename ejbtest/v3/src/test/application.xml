@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:application="http://java.sun.com/xml/ns/javaee/application_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_5.xsd"
+	id="Application_ID" version="5">
+	<display-name> eartest1</display-name>
+	<module>
+		<connector>eartest1Connector.rar</connector>
+	</module>
+	<module>
+		<web>
+			<web-uri>eartest1Web.war</web-uri>
+			<context-root>eartest1Web</context-root>
+		</web>
+	</module>
+	<module>
+		<java>eartest1Client.jar</java>
+	</module>
+	<module>
+		<ejb>eartest1EJB.jar</ejb>
+	</module>
+</application>

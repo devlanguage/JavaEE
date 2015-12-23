@@ -1,0 +1,20 @@
+<html>
+<head></head>
+<script type="text/javascript" src="prototype.js"></script>
+<script type="text/javascript">
+  function displayContent(){
+    //var stu = new UnderGraduate("tiddles", "7.5 meters");
+    var stu = new UnderGraduate();
+    stu.cources.push('elment01', "elment02");
+    domDiv.innerHTML = stu.getPName() 
+      + "--" +stu.toString() 
+      + "--" + stu.getCources()
+      + "--" + stu.cources;
+  }
+</script>
+<body>
+df
+<button onclick="displayContent()">Display</button>
+<div id="domDiv" />sfadfsfsd
+</body>
+</html>

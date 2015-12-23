@@ -1,0 +1,30 @@
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="pwdp.config.last.store.location"></entry>
+	<entry key="pwdp.config.default.charset">gb2312</entry>
+
+	<entry key="pwdp.config.window.resizable">true</entry>
+	<entry key="pwdp.config.window.always_on_top">false</entry>
+	<entry key="pwdp.config.window.location.top">100</entry>
+	<entry key="pwdp.config.window.location.left">100</entry>
+	<entry key="pwdp.config.window.dimension.width">500</entry>
+	<entry key="pwdp.config.window.dimension.height">400</entry>
+	<entry key="pwdp.config.new.file.prefix">未命名-</entry>
+	
+	<entry key="pwdp.label.window.title">密码管理器</entry>	
+	<entry key="pwdp.label.menu.file">文件</entry>
+	<entry key="pwdp.label.menuitem.file.new">新建</entry>
+	<entry key="pwdp.label.menuitem.file.open">打开</entry>
+	<entry key="pwdp.label.menuitem.file.save">保存</entry>
+	<entry key="pwdp.label.menuitem.file.exit">退出</entry>
+	<entry key="pwdp.label.menu.cipher">加密与解密</entry>
+	<entry key="pwdp.label.menuitem.cipher.encrypt_by_md5">用MD5加密</entry>
+	<entry key="pwdp.label.menuitem.cipher.encrypt_by_des">用DES加密</entry>
+	<entry key="pwdp.label.menuitem.cipher.decrypt_by_des">用DES加密</entry>
+	<entry key="pwdp.label.menu.help">帮助</entry>
+	<entry key="pwdp.label.menu.tool">工具</entry>
+	<entry key="pwdp.label.toolbar.font.bold">Bold</entry>
+	<entry key="pwdp.label.toolbar.font.plain">Plain</entry>
+	<entry key="pwdp.label.toolbar.font.italic">Italic</entry>
+	
+</properties>

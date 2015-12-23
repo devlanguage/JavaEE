@@ -1,0 +1,39 @@
+##Javascript Inner Generic Object. 所有对象都将拥有他的属性和函数
+  Boolean hasOwnProperty(String name)
+  Boolean isPrototypeOf(Object obj)
+  Boolean propertyIsEnumerable(String name)
+  String  toLocaleString()
+  String  toString()
+  String  toSource()
+  Object  valueOf()
+  
+###Javascript可以识别两种类型的对象，
+  一种叫做Host Object，由运行环境提供例如document对象， Dom Node等 
+  一种叫做Native Object属于语言范畴; Native objects是一种松散的结构并且可以动态的增加属性(property)，所有的属性都有一个名字和一个值，
+这个值可以是另一个对象的引用或者是内建的数据类型(String, Number, Boolean, Null 或者 Undefined) 
+
+##赋值操作 
+var objectRef = new Object(); //create a generic javascript object
+//一个名为testNumber的属性可以这样创建, 如果复制的属性名称已经存在那么不会再次创建这个属性，赋值操作仅仅是重新设置属性的值
+objectRef.testNumber = 5;   
+  /* - or:- */  
+objectRef["testNumber"] = 5;  
+
+##js对象的原型(prototype)自己本身也可以是对象，也可以有属性(property),对于js对象的(prototype)的赋值操作跟普通对象属性的创建没什么不同。 
+
+###取值操作 
+// 为一个对象的属性赋值，如果这个对象没有这个属性，那么在赋值操作后，这个对象就有这个属性了
+  objectRef.testNumber = 8;   
+//读出这个属性的值
+  var val = objectRef.testNumber;  // 现在val 就得到了刚才赋予objectRef的值8了
+
+### prototype揭密 --- (Object的默认的prototype是null) 
+所有的对象都可以有prototype, prototype自己也是对象，那么他也可以有prototypes,这样循环下去就形成了一个prototype链， 
+这个链当他遇到链中队形的prototype是null时中止。
+例如： 
+function A(){}
+A.prototype.method1 = function() { }
+  this.id="23"
+}
+
+function B(){}

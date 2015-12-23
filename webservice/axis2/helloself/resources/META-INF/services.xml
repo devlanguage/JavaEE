@@ -1,0 +1,23 @@
+<serviceGroup>
+	<service name="HelloSelfService" scope="application">
+		<description>Just for POJO WebService</description>
+		<messageReceivers>
+			<messageReceiver
+				mep="http://www.w3.org/2004/08/wsdl/in-only"
+				class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver" />
+			<messageReceiver mep="http://www.w3.org/2004/08/wsdl/in-out"
+				class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</messageReceivers>
+		<parameter name="ServiceClass">
+			org.basic.axis2.helloself.service.HelloSelfService
+		</parameter>
+	</service>
+	<!-- 
+		At runtime, you can share information between these services within
+		a single interaction using the ServiceGroupContext. If you hope to
+		use this functionality, the services.xml file should have the
+		following format.
+	-->
+	<module ref="ModuleName" />
+	<parameter name="serviceGroupParam1">value 1</parameter>
+</serviceGroup>

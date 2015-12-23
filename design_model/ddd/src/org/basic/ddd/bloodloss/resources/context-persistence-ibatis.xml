@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+          "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+  <bean id="sqlMapClient"
+        class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+    <property name="dataSource" ref="dataSource" />
+    <property name="sqlMapClientProperties">
+      <props>
+        <prop key="hibernate.show_sql">true</prop>
+        <prop key="hibernate.hbm2ddl.auto">update</prop>
+        <prop key="hibernate.format_sql">true</prop>
+        <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
+      </props>
+    </property>
+    <property name="configLocations">            
+        <value>classpath:org/basic/ddd/bloodloss/resources/ibatis-mapping-config.xml</value>
+    </property>
+  </bean>
+  
+  <bean id="accountDAO" class="org.basic.ddd.bloodloss.dao.ibatisimpl.AccountDAOIbatis">
+    <constructor-arg ref="sqlMapClient" />
+  </bean>
+  <bean id="transferTransactionDAO" class="org.basic.ddd.bloodloss.dao.ibatisimpl.TransferTransactionDAOIbatis">
+    <constructor-arg ref="sqlMapClient" />
+  </bean>
+</beans>

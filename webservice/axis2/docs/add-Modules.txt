@@ -1,0 +1,181 @@
+1. Create the Module Implementation: LoggingModule.java
+2. Create the Handlers:              LogHandler.java
+3. add the "module.xml"
+4. Modify the "axis2.xml" (if you need custom phases)
+5. Modify the "services.xml" to engage modules at the deployment time.
+6. Package in a ".mar" (Module Archive)
+7. Deploy the module in Axis2
+
+<!--     LoggingModule.java   -->
+	import org.apache.axis2.AxisFault;
+	import org.apache.axis2.context.ConfigurationContext;
+	import org.apache.axis2.description.AxisDescription;
+	import org.apache.axis2.description.AxisModule;
+	import org.apache.neethi.Assertion;
+	import org.apache.neethi.Policy;
+	
+	public class LoggingModule implements org.apache.axis2.modules.Module {	
+	    /*
+	     * The first three methods can be used to control the module initialization and the termination,
+	     */
+	    public void engageNotify(AxisDescription axisDescription) throws AxisFault;
+	    public void init(ConfigurationContext configContext, AxisModule module) throws AxisFault ;
+	    public void shutdown(ConfigurationContext configurationContext) throws AxisFault;
+	    
+	    /*
+	     * the next three methods are used to perform policy related operations
+	     */	
+	    public void applyPolicy(Policy policy, AxisDescription axisDescription) throws AxisFault;
+	    public boolean canSupportAssertion(Assertion assertion);
+	}
+	
+<!--     LogHandler.java   -->		
+	import org.apache.axis2.AxisFault;
+	import org.apache.axis2.context.MessageContext;
+	import org.apache.axis2.engine.Handler;
+	import org.apache.axis2.handlers.AbstractHandler;
+	import org.apache.commons.logging.Log;
+	import org.apache.commons.logging.LogFactory;
+	
+	public class LogHandler extends AbstractHandler implements Handler {
+	
+	    private static final Log log = LogFactory.getLog(LogHandler.class);
+	    private String name;
+	
+	    public String getName() {
+	
+	        return name;
+	    }
+	
+	    public InvocationResponse invoke(MessageContext msgContext) throws AxisFault {
+	
+	        log.info(msgContext.getEnvelope().toString());
+	        return InvocationResponse.CONTINUE;
+	    }
+	
+	    public void revoke(MessageContext msgContext) {
+	
+	        log.info(msgContext.getEnvelope().toString());
+	    }
+	
+	    public void setName(String name) {
+	
+	        this.name = name;
+	    }
+	}
+	
+<!--     module.xml   -->
+	<module name="logging" class="userguide.loggingmodule.LoggingModule">
+		<!--
+			InFlow:
+			Represents the handler chain that will run when a message is coming in.
+			OutFlow:
+			Represents the handler chain that will run when the message is going out.
+			OutFaultFlow:
+			Represents the handler chain that will run when there is a fault, and the fault is going out.
+			InFaultFlow:
+		-->
+		<InFlow>
+			<handler name="InFlowLogHandler"
+				class="userguide.loggingmodule.LogHandler">
+				<order phase="loggingPhase" />
+			</handler>
+		</InFlow>
+	
+		<OutFlow>
+			<handler name="OutFlowLogHandler"
+				class="userguide.loggingmodule.LogHandler">
+				<order phase="loggingPhase" />
+			</handler>
+		</OutFlow>
+	
+		<OutFaultFlow>
+			<handler name="FaultOutFlowLogHandler"
+				class="userguide.loggingmodule.LogHandler">
+				<order phase="loggingPhase" />
+			</handler>
+		</OutFaultFlow>
+	
+		<InFaultFlow>
+			<handler name="FaultInFlowLogHandler"
+				class="userguide.loggingmodule.LogHandler">
+				<order phase="loggingPhase" />
+			</handler>
+		</InFaultFlow>
+	</module>
+	
+<!--     axis2.xml   -->	
+	<phaseOrder type="inflow">
+        <!--  System pre defined phases       -->
+        <phase name="TransportIn"/>
+        <phase name="PreDispatch"/>
+        <phase name="Dispatch" class="org.apache.axis2.engine.DispatchPhase">
+            <handler name="AddressingBasedDispatcher"
+                     class="org.apache.axis2.dispatchers.AddressingBasedDispatcher">
+                <order phase="Dispatch"/>
+            </handler>
+
+            <handler name="RequestURIBasedDispatcher"
+                     class="org.apache.axis2.dispatchers.RequestURIBasedDispatcher">
+                <order phase="Dispatch"/>
+            </handler>
+
+            <handler name="SOAPActionBasedDispatcher"
+                     class="org.apache.axis2.dispatchers.SOAPActionBasedDispatcher">
+                <order phase="Dispatch"/>
+            </handler>
+
+            <handler name="SOAPMessageBodyBasedDispatcher"
+                     class="org.apache.axis2.dispatchers.SOAPMessageBodyBasedDispatcher">
+                <order phase="Dispatch"/>
+            </handler>
+            <handler name="InstanceDispatcher"
+                     class="org.apache.axis2.engine.InstanceDispatcher">
+                <order phase="PostDispatch"/>
+            </handler>
+        </phase>
+        <!--  System pre defined phases       -->
+        <!--   After Postdispatch phase module author or service author can add any phase he wants      -->
+        <phase name="OperationInPhase"/>
+                <phase name="loggingPhase"/>
+    </phaseOrder>
+    <phaseOrder type="outflow">
+        <!--      user can add his own phases to this area  -->
+        <phase name="OperationOutPhase"/>
+        <phase name="loggingPhase"/>
+        <!--system predefined phases-->
+        <!--these phases will run irrespective of the service-->
+        <phase name="PolicyDetermination"/>
+        <phase name="MessageOut"/>
+    </phaseOrder/>
+    <phaseOrder type="INfaultflow">
+        <!--      user can add his own phases to this area  -->
+        <phase name="OperationInFaultPhase"/>
+        <phase name="loggingPhase"/>
+    </phaseOrder>
+    <phaseOrder type="Outfaultflow">
+        <!--      user can add his own phases to this area  -->
+        <phase name="OperationOutFaultPhase"/>
+        <phase name="loggingPhase"/>
+        <phase name="PolicyDetermination"/>
+        <phase name="MessageOut"/>
+    </phaseOrder>
+    
+<!-- services.xml -->
+	<service name="MyServiceWithModule">
+	    <description>
+		    This is a sample Web service with a logging module engaged.
+	    </description>
+	    <!--
+	    	This informs the Axis2 engine that the module "logging" should be engaged for this service. The handler inside the module will be executed in their respective phases as described by the "module.xml".	
+	    -->
+	    <module ref="logging"/>
+
+	    <parameter name="ServiceClass" locked="xsd:false">userguide.example2.MyService</parameter>
+	    <operation name="echo">
+		    <messageReceiver class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver"/>
+	    </operation>
+	    <operation name="ping">
+		    <messageReceiver class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver"/>
+	    </operation>
+	</service>

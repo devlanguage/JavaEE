@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<project name="jsptest" default="deploy-ear" basedir=".">
+
+	<property name="top" location="../" />
+	<property name="current" location="./" />
+	<property file="${current}/build.properties" />
+	<property name="dir.src.common" value="${top}/common" />
+	<property name="dir.lib" value="${current}/lib" />
+	<property name="dir.lib.struts2" value="${current}/lib" />
+	<property name="dir.src.main" value="${current}/src/main" />
+	<property name="dir.src.test" value="${current}/src/test" />
+	<property name="dir.web" value="${current}/WebContent" />
+	<property name="dir.config" value="${current}/config/${app.server.type}" />
+	<property name="dir.config.metainf" value="${dir.config}/META-INF" />
+	<property name="dir.output" value="${current}/output/${app.server.type}" />
+	<property name="dir.build.src" value="${dir.output}/src" />
+	<property name="dir.build.dest" value="${dir.output}/dest" />
+	<property name="dir.build.stage" value="${dir.output}/stage" />
+
+	<path id="lib.dependency">
+		<!--pathelement path="${classpath}"/-->
+		<fileset dir="${app.server.client.lib}" includes="**/*.jar">
+			<!--
+            <include name="ejb3-persistence.jar" />
+            <include name="jboss-annotations-ejb3.jar" />
+            <include name="jboss-j2ee.jar" />-->
+		</fileset>
+
+		<fileset dir="${dir.lib.common}" includes="*.*" />
+		<fileset dir="${dir.lib.struts2}" includes="*.*" />
+		<fileset dir="${dir.lib.hibernate3}" includes="*.*" />
+
+	</path>
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: init                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="init" depends="clean">
+
+		<mkdir dir="${dir.build.src}" />
+		<mkdir dir="${dir.build.dest}" />
+		<mkdir dir="${dir.build.stage}/WEB-INF/classes" />
+	</target>
+	<!-- ================================= 
+          target: compile              
+         ================================= -->
+	<target name="compile" depends="init" description="--> description">
+		<copy todir="${dir.build.src}">
+			<fileset dir="${dir.src.main}" includes="**/*.*" />
+			<fileset dir="${dir.src.common}" includes="**/*.*" />
+		</copy>
+		<javac srcdir="${dir.build.src}" destdir="${dir.build.dest}" fork="false" memoryinitialsize="40M" memorymaximumsize="200M" debug="true" debuglevel="lines,vars,source" listfiles="false" verbose="false" encoding="${conf.encoding}" excludes="/org/ejbtest/jpa/">
+			<classpath refid="lib.dependency" />
+		</javac>
+		<delete dir="${dir.build.src}">
+		</delete>
+	</target>
+	<!-- ================================= 
+          target: package              
+         ================================= -->
+	<target name="package" depends="compile" description="--> description">
+		<jar destfile="${dir.output}/${app.name}.jar">
+			<fileset dir="${dir.build.dest}" includes="org/ejbtest/**/*.*">
+			</fileset>
+			<metainf dir="${dir.config.metainf}">
+				<include name="persistence.xml" />
+			</metainf>
+			<manifest>
+				<!--
+                    Manifest-Version: 1.0
+                    Built-By: conor
+                    Created-By: Apache Ant 1.6.5
+                    
+                    Name: common/MyClass.class
+                    Sealed: false
+                -->
+				<attribute name="Built-By" value="user.name" />
+				<section name="common/class1.class">
+					<attribute name="Sealed" value="false" />
+				</section>
+			</manifest>
+		</jar>
+		<copy todir="${dir.build.stage}/WEB-INF/classes">
+			<fileset dir="${dir.build.dest}" includes="**/*.*" />
+		</copy>
+		<war warfile="${dir.output}/${app.name}.war" webxml="${dir.config}/web.xml" >
+			<fileset dir="${dir.web}" includes="**/*.*" />
+			<fileset dir="${dir.build.stage}" includes="**/*.*" excludes="**/ejbtest/**/*.*" />
+		</war>
+		<ear destfile="${dir.output}/${app.name}.ear" appxml="${dir.config}/application.xml">
+			<fileset dir="${dir.output}" includes="*.jar,*.war" />
+		</ear>
+	</target>
+	<!-- ================================= 
+          target: test              
+         ================================= -->
+	<target name="test" description="description">
+		<java classname="org.ejbtest.account.AccountServiceTester">
+			<classpath refid="lib.dependency" />
+			<classpath path="${dir.build.dest}" />
+		</java>
+	</target>
+
+	<!-- ================================= 
+          target: deploy              
+         ================================= -->
+	<target name="deploy-jar" depends="package" description="--> description">
+		<copy file="${dir.output}/${app.name}.jar" todir="${app.server.deploy}" />
+	</target>
+	<target name="deploy-war" depends="package" description="--> description">
+		<copy file="${dir.output}/${app.name}.war" todir="${app.server.deploy}" />
+	</target>
+	<target name="deploy-ear" depends="package" description="--> description">
+		<copy file="${dir.output}/${app.name}.ear" todir="${app.server.deploy}" />
+	</target>
+	<!-- ================================= 
+          target: clean              
+         ================================= -->
+	<target name="clean" description="--> description">
+		<delete dir="${dir.output}" />
+	</target>
+</project>

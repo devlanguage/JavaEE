@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<jboss>
+	<enterprise-beans>
+		<session>
+			<ejb-name>EmployeeService</ejb-name>
+		</session>
+		<message-driven>
+			<ejb-name>ejb/EmployeeMdb/remote</ejb-name>
+			<destination-jndi-name>queue/A</destination-jndi-name>
+			<resource-ref>
+				<res-ref-name>jms/QueueConnectionFactory</res-ref-name>
+				<jndi-name>QueueConnectionFactory</jndi-name>
+			</resource-ref>
+		</message-driven>
+	</enterprise-beans>
+</jboss>

@@ -1,0 +1,66 @@
+####################################################################
+################# deploy,undeploy,list the application
+###################################################
+######### Geronimo specific Deployment plan and Stanadrd J2EE specification
+###################################################
+File                                        Standard Deployment Descriptors in the J2EE     Apache Geronimo specific Deployment plan
+--------------------------------------------------------------------------------------------------------------------------------------  
+Web Application Archive (WAR)                   web.xml under the WEB-INF directory             geronimo-web.xml  
+Enterprise Web application archive (EAR)        application.xml                                 geronimo-application.xml  
+J2EE Connector resources archive (RAR)          ra.xml                                          geronimo-ra.xml  
+J2EE client application archive (JAR)           client.xml                                      geronimo-application-client.xml  
+JAR containing EJBs                             ejb-jar.xml under the META-INF directory        openejb-jar.xml
+
+###################################################
+if the following codes exist in the file Apache Geronimo specific Deployment plan geronimo-web.xml
+    <environment>
+        <moduleId>
+            <groupId>sample.applications</groupId>
+            <artifactId>GeronimoHelloApp</artifactId>
+            <version>1.2</version>
+        </moduleId>
+    </environment>
+java -jar %GERONIMO_HOME%\bin\deployer.jar --user system --password manager undeploy GeronimoHelloApp
+--java -jar %GERONIMO_HOME%\bin\deployer.jar --user system --password manager undeploy sample.applications/GeronimoHelloApp/1.2/war
+java -jar %GERONIMO_HOME%\bin\deployer.jar --user system --password manager deploy HelloWorld.war
+java -jar %GERONIMO_HOME%\bin\deployer.jar --user system --password manager deploy <app_home>\HelloWorld.war <deployment_plan_home>\plan.xml
+
+java -jar %GERONIMO_HOME%\bin\deployer.jar --user system --password manager list-modules [--all | --started | stopped]
+
+java -jar %GERONIMO_HOME%\bin\deployer.jar --user system --password manager stop  sample.applications/HelloWorldApp/1.1/war
+java -jar %GERONIMO_HOME%\bin\deployer.jar --user system --password manager start sample.applications/HelloWorldApp/1.1/war
+
+####################################################################
+################# Config the Geronio Port
+###################################################
+----To configure the default port edit the <geronimo_home>/var/config/config.xml file. Go to the file and open in a text editor. 
+--In order to change the default port, scroll down to the code that looks like below in the config.xml file and change the port number.
+--Excerpt from config.xml - Tomcat
+    <gbean load="false" name="FirstValve"/>
+    <gbean name="TomcatResources"/>
+    <gbean name="TomcatWebConnector">
+      <attribute name="host">0.0.0.0</attribute>
+      <attribute name="port">9000</attribute>
+      <attribute name="redirectPort">8443</attribute>
+    </gbean>
+--Excerpt from config.xml - Jetty
+    <module name="geronimo/activemq/1.1/car"/>
+    <module name="geronimo/jetty/1.1/car">
+    <gbean name="JettyWebConnector">
+        <attribute name="host">0.0.0.0</attribute>
+        <attribute name="port">9000</attribute>
+    <attribute name="redirectPort">8443</attribute>
+or edit the file config-substitutions.properties and scroll down to the code that looks like below
+    HTTPPort=8080
+    HTTPSPort=8443
+
+####################################################################
+################# Config the Manager
+###################################################
+1. Edit the .properties
+ 1)Edit the %GERONIMO_HOME%/var/security/groups.properties to add username
+    admin=user1,user2    
+ 2)Edit the %GERONIMO_HOME%/var/security/users.properties to change password
+    user1=password1
+    user2=password2
+    

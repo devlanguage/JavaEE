@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+
+    <persistence-unit name="account_unit">
+        <jta-data-source>java:/OracleXADS</jta-data-source>
+        <non-jta-data-source>java:/OracleDS</non-jta-data-source>
+        <class>org.ejbtest.account.persistence.Account</class>
+        <!--
+            <properties>
+            <property name="openjpa.jdbc.SynchronizeMappings" value="buildSchema(ForeignKeys=true)" />
+            </properties>
+        -->
+        <properties>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+            <property name="hibernate.show_sql" value="true" />
+            
+            <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle9Dialect" />
+        </properties>
+    </persistence-unit>
+</persistence>

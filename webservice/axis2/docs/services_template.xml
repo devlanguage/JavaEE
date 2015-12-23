@@ -1,0 +1,1468 @@
+<!-- This file was auto-generated from WSDL -->
+<!-- by the Apache Axis2 version: #axisVersion# #today# -->
+<serviceGroup>
+
+	<service name="FaultService" scope="application">
+		<messageReceivers>
+			<messageReceiver mep="http://www.w3.org/2006/01/wsdl/in-out"
+				class="org.tmforum.tmf854.v1.ws.fault.FaultServiceMessageReceiverInOut" />
+		</messageReceivers>
+
+		<parameter locked="false" name="ServiceClass">
+			com.tellabs.tmfnbi.mtosi.server.service.fault.FaultServiceImpl
+		</parameter>
+
+		<operation name="getActiveAlarmsIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getActiveAlarmIterator</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/AlarmRetrieval/getActiveAlarmsIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/AlarmRetrieval/getActiveAlarmsIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+
+		<operation name="getActiveAlarmsCount"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping />
+			<outputActionMapping>
+				tmf854.v1.ws/AlarmRetrieval/getActiveAlarmsCountResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/AlarmRetrieval/getActiveAlarmsCount/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+
+		<operation name="getActiveAlarms"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping />
+			<outputActionMapping>
+				tmf854.v1.ws/AlarmRetrieval/getActiveAlarmsResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/AlarmRetrieval/getActiveAlarms/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+
+	</service>
+
+	<service name="NotificationConsumer" scope="application">
+		<messageReceivers>
+			<messageReceiver
+				mep="http://www.w3.org/2006/01/wsdl/in-only"
+				class="org.tmforum.tmf854.v1.ws.notif.NotificationConsumerMessageReceiverInOnly" />
+		</messageReceivers>
+		<parameter locked="false" name="ServiceClass">
+			com.tellabs.tmfnbi.client.mtosi.notif.NotificationConsumerImpl
+		</parameter>
+		<operation name="notify"
+			mep="http://www.w3.org/2006/01/wsdl/in-only">
+			<actionMapping>notify</actionMapping>
+		</operation>
+		<!--<transports>
+			<transport>jms</transport>
+			</transports>-->
+	</service>
+
+	<service name="NotificationProducer" scope="application">
+		<messageReceivers>
+			<messageReceiver mep="http://www.w3.org/2006/01/wsdl/in-out"
+				class="org.tmforum.tmf854.v1.ws.notif.NotificationProducerMessageReceiverInOut" />
+		</messageReceivers>
+		<parameter locked="false" name="ServiceClass">
+			com.tellabs.tmfnbi.mtosi.server.service.notif.NotificationProducerImpl
+		</parameter>
+		<operation name="subscribe"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>subscribe</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/NotificationProducer/subscribeResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/NotificationProducer/subscribe/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="unsubscribe"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>unsubscribe</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/NotificationProducer/unsubscribeResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/NotificationProducer/unsubscribe/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+	</service>
+	<!--
+		<service name="NotificationBroker" scope="application">
+		<messageReceivers>
+		<messageReceiver mep="http://www.w3.org/2006/01/wsdl/in-out" class="org.tmforum.tmf854.v1.ws.notif.NotificationBrokerMessageReceiverInOut"/>
+		<messageReceiver mep="http://www.w3.org/2006/01/wsdl/in-only" class="org.tmforum.tmf854.v1.ws.notif.NotificationBrokerMessageReceiverInOnly"/>
+		</messageReceivers>
+		<parameter locked="false" name="ServiceClass">org.tmforum.tmf854.v1.ws.notif.NotificationBrokerSkeleton</parameter>
+		<operation name="subscribe" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>subscribe</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/NotificationBroker/subscribeResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/NotificationBroker/subscribe/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="unsubscribe" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>unsubscribe</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/NotificationBroker/unsubscribeResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/NotificationBroker/unsubscribe/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="notify" mep="http://www.w3.org/2006/01/wsdl/in-only">
+		<actionMapping>notify</actionMapping>
+		</operation>
+		</service>
+	-->
+
+	<service name="EquipmentInventoryMgr" scope="application">
+		<messageReceivers>
+			<messageReceiver mep="http://www.w3.org/2006/01/wsdl/in-out"
+				class="org.tmforum.tmf854.v1.ws.conf.EquipmentInventoryMgrMessageReceiverInOut" />
+		</messageReceivers>
+		<parameter locked="false" name="ServiceClass">
+			com.tellabs.tmfnbi.mtosi.server.service.equipment.EquipmentInventoryImpl
+		</parameter>
+		<operation name="getAllEquipmentNames"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllEquipmentNames</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/EquipmentInventoryMgr/getAllEquipmentNamesResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/EquipmentInventoryMgr/getAllEquipmentNames/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllEquipmentNamesIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllEquipmentNamesIterator</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/EquipmentInventoryMgr/getAllEquipmentNamesIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/EquipmentInventoryMgr/getAllEquipmentNamesIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllEquipment"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllEquipment</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/EquipmentInventoryMgr/getAllEquipmentResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/EquipmentInventoryMgr/getAllEquipment/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllEquipmentIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllEquipmentIterator</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/EquipmentInventoryMgr/getAllEquipmentIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/EquipmentInventoryMgr/getAllEquipmentIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllSupportedPTPNames"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllSupportedPTPNames</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/EquipmentInventoryMgr/getAllSupportedPTPNamesResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/EquipmentInventoryMgr/getAllSupportedPTPNames/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllSupportedPTPNamesIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>
+				getAllSupportedPTPNamesIterator
+			</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/EquipmentInventoryMgr/getAllSupportedPTPNamesIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/EquipmentInventoryMgr/getAllSupportedPTPNamesIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllSupportedPTPs"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllSupportedPTPs</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/EquipmentInventoryMgr/getAllSupportedPTPsResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/EquipmentInventoryMgr/getAllSupportedPTPs/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllSupportedPTPsIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllSupportedPTPsIterator</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/EquipmentInventoryMgr/getAllSupportedPTPsIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/EquipmentInventoryMgr/getAllSupportedPTPsIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllSupportingEquipmentNames"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>
+				getAllSupportingEquipmentNames
+			</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/EquipmentInventoryMgr/getAllSupportingEquipmentNamesResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/EquipmentInventoryMgr/getAllSupportingEquipmentNames/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllSupportingEquipment"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllSupportingEquipment</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/EquipmentInventoryMgr/getAllSupportingEquipmentResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/EquipmentInventoryMgr/getAllSupportingEquipment/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getContainedEquipment"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getContainedEquipment</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/EquipmentInventoryMgr/getContainedEquipmentResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/EquipmentInventoryMgr/getContainedEquipment/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getEquipment"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getEquipment</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/EquipmentInventoryMgr/getEquipmentResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/EquipmentInventoryMgr/getEquipment/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getSupportedEquipmentNames"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getSupportedEquipmentNames</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/EquipmentInventoryMgr/getSupportedEquipmentNamesResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/EquipmentInventoryMgr/getSupportedEquipmentNames/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getSupportedEquipment"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getSupportedEquipment</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/EquipmentInventoryMgr/getSupportedEquipmentResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/EquipmentInventoryMgr/getSupportedEquipment/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getSupportingEquipmentNames"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getSupportingEquipmentNames</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/EquipmentInventoryMgr/getSupportingEquipmentNamesResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/EquipmentInventoryMgr/getSupportingEquipmentNames/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getSupportingEquipment"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getSupportingEquipment</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/EquipmentInventoryMgr/getSupportingEquipmentResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/EquipmentInventoryMgr/getSupportingEquipment/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+	</service>
+
+	<service name="InventoryRetrieval" scope="application">
+		<messageReceivers>
+			<messageReceiver mep="http://www.w3.org/2006/01/wsdl/in-out"
+				class="org.tmforum.tmf854.v1.ws.conf.InventoryRetrievalMessageReceiverInOut" />
+		</messageReceivers>
+		<parameter locked="false" name="ServiceClass">
+			com.tellabs.tmfnbi.mtosi.server.service.inventory.InventoryRetrievalImpl
+		</parameter>
+		<operation name="getInventory"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getInventory</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/InventoryRetrieval/getInventoryResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/InventoryRetrieval/getInventory/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getInventoryIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getInventoryIterator</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/InventoryRetrieval/getInventoryIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/InventoryRetrieval/getInventoryIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+	</service>
+
+	<service name="ManagedElementMgr" scope="application">
+		<messageReceivers>
+			<messageReceiver mep="http://www.w3.org/2006/01/wsdl/in-out"
+				class="org.tmforum.tmf854.v1.ws.conf.ManagedElementMgrMessageReceiverInOut" />
+		</messageReceivers>
+		<parameter locked="false" name="ServiceClass">
+			com.tellabs.tmfnbi.mtosi.server.service.managedelement.ManagedElementMgrImpl
+		</parameter>
+		<operation name="getAllActiveAlarms"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllActiveAlarms</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getAllActiveAlarmsResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getAllActiveAlarms/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllActiveAlarmsIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllActiveAlarmsIterator</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getAllActiveAlarmsIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getAllActiveAlarmsIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllCrossConnections"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllCrossConnections</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getAllCrossConnectionsResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getAllCrossConnections/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllCrossConnectionsIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>
+				getAllCrossConnectionsIterator
+			</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getAllCrossConnectionsIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getAllCrossConnectionsIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllFixedCrossConnections"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllFixedCrossConnections</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getAllFixedCrossConnectionsResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getAllFixedCrossConnections/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllFixedCrossConnectionsIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>
+				getAllFixedCrossConnectionsIterator
+			</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getAllFixedCrossConnectionsIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getAllFixedCrossConnectionsIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllFTPNames"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllFTPNames</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getAllFTPNamesResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getAllFTPNames/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllFTPNamesIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllFTPNamesIterator</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getAllFTPNamesIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getAllFTPNamesIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllFTPs"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllFTPs</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getAllFTPsResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getAllFTPs/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllFTPsIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllFTPsIterator</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getAllFTPsIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getAllFTPsIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllManagedElementNames"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllManagedElementNames</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getAllManagedElementNamesResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getAllManagedElementNames/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllManagedElementNamesIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>
+				getAllManagedElementNamesIterator
+			</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getAllManagedElementNamesIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getAllManagedElementNamesIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllManagedElements"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllManagedElements</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getAllManagedElementsResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getAllManagedElements/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllManagedElementsIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllManagedElementsIterator</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getAllManagedElementsIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getAllManagedElementsIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllPTPNames"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllPTPNames</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getAllPTPNamesResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getAllPTPNames/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllPTPNamesIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllPTPNamesIterator</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getAllPTPNamesIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getAllPTPNamesIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllPTPs"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllPTPs</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getAllPTPsResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getAllPTPs/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllPTPsIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllPTPsIterator</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getAllPTPsIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getAllPTPsIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllPTPNamesWithoutFTPs"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllPTPNamesWithoutFTPs</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getAllPTPNamesWithoutFTPsResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getAllPTPNamesWithoutFTPs/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllPTPNamesWithoutFTPsIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>
+				getAllPTPNamesWithoutFTPsIterator
+			</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getAllPTPNamesWithoutFTPsIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getAllPTPNamesWithoutFTPsIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllPTPsWithoutFTPs"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllPTPsWithoutFTPs</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getAllPTPsWithoutFTPsResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getAllPTPsWithoutFTPs/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllPTPsWithoutFTPsIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllPTPsWithoutFTPsIterator</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getAllPTPsWithoutFTPsIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getAllPTPsWithoutFTPsIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllUnacknowledgedActiveAlarms"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>
+				getAllUnacknowledgedActiveAlarms
+			</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getAllUnacknowledgedActiveAlarmsResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getAllUnacknowledgedActiveAlarms/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllUnacknowledgedActiveAlarmsIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>
+				getAllUnacknowledgedActiveAlarmsIterator
+			</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getAllUnacknowledgedActiveAlarmsIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getAllUnacknowledgedActiveAlarmsIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getContainedCurrentCTPNames"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getContainedCurrentCTPNames</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getContainedCurrentCTPNamesResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getContainedCurrentCTPNames/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getContainedCurrentCTPNamesIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>
+				getContainedCurrentCTPNamesIterator
+			</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getContainedCurrentCTPNamesIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getContainedCurrentCTPNamesIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getContainedCurrentCTPs"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getContainedCurrentCTPs</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getContainedCurrentCTPsResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getContainedCurrentCTPs/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getContainedCurrentCTPsIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>
+				getContainedCurrentCTPsIterator
+			</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getContainedCurrentCTPsIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getContainedCurrentCTPsIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getContainedInUseCTPNames"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getContainedInUseCTPNames</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getContainedInUseCTPNamesResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getContainedInUseCTPNames/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getContainedInUseCTPNamesIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>
+				getContainedInUseCTPNamesIterator
+			</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getContainedInUseCTPNamesIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getContainedInUseCTPNamesIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getContainedInUseCTPs"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getContainedInUseCTPs</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getContainedInUseCTPsResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getContainedInUseCTPs/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getContainedInUseCTPsIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getContainedInUseCTPsIterator</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getContainedInUseCTPsIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getContainedInUseCTPsIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getContainedPotentialCTPNames"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getContainedPotentialCTPNames</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getContainedPotentialCTPNamesResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getContainedPotentialCTPNames/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getContainedPotentialCTPNamesIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>
+				getContainedPotentialCTPNamesIterator
+			</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getContainedPotentialCTPNamesIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getContainedPotentialCTPNamesIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getContainedPotentialCTPs"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getContainedPotentialCTPs</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getContainedPotentialCTPsResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getContainedPotentialCTPs/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getContainedPotentialCTPsIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>
+				getContainedPotentialCTPsIterator
+			</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getContainedPotentialCTPsIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getContainedPotentialCTPsIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getContainingSubnetworkNames"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getContainingSubnetworkNames</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getContainingSubnetworkNamesResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getContainingSubnetworkNames/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getContainingTPNames"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getContainingTPNames</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getContainingTPNamesResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getContainingTPNames/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getContainingTPs"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getContainingTPs</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getContainingTPsResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getContainingTPs/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getManagedElement"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getManagedElement</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getManagedElementResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getManagedElement/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getPotentialFixedCCs"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getPotentialFixedCCs</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getPotentialFixedCCsResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getPotentialFixedCCs/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getTP"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getTP</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/ManagedElementMgr/getTPResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/ManagedElementMgr/getTP/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+	</service>
+
+	<!--
+		<service name="MultiLayerSubnetworkMgr">
+		<messageReceivers>
+		<messageReceiver mep="http://www.w3.org/2006/01/wsdl/in-out" class="org.tmforum.tmf854.v1.ws.conf.MultiLayerSubnetworkMgrMessageReceiverInOut"/>
+		</messageReceivers>
+		<parameter locked="false" name="ServiceClass">org.tmforum.tmf854.v1.ws.conf.MultiLayerSubnetworkMgrSkeleton</parameter>
+		<operation name="getAllEdgePointNames" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllEdgePointNames</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllEdgePointNamesResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllEdgePointNames/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllEdgePointNamesIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllEdgePointNamesIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllEdgePointNamesIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllEdgePointNamesIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllEdgePoints" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllEdgePoints</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllEdgePointsResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllEdgePoints/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllEdgePointsIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllEdgePointsIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllEdgePointsIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllEdgePointsIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllManagedElementNamesWrtMLSN" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllManagedElementNamesWrtMLSN</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllManagedElementNamesWrtMLSNResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllManagedElementNamesWrtMLSN/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllManagedElementNamesWrtMLSNIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllManagedElementNamesWrtMLSNIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllManagedElementNamesWrtMLSNIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllManagedElementNamesWrtMLSNIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllManagedElementsWrtMLSN" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllManagedElementsWrtMLSN</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllManagedElementsWrtMLSNResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllManagedElementsWrtMLSN/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllManagedElementsWrtMLSNIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllManagedElementsWrtMLSNIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllManagedElementsWrtMLSNIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllManagedElementsWrtMLSNIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllSubnetworkConnectionNames" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllSubnetworkConnectionNames</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllSubnetworkConnectionNamesResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllSubnetworkConnectionNames/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllSubnetworkConnectionNamesIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllSubnetworkConnectionNamesIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllSubnetworkConnectionNamesIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllSubnetworkConnectionNamesIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllSubnetworkConnectionNamesWithTP" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllSubnetworkConnectionNamesWithTP</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllSubnetworkConnectionNamesWithTPResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllSubnetworkConnectionNamesWithTP/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllSubnetworkConnectionNamesWithTPIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllSubnetworkConnectionNamesWithTPIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllSubnetworkConnectionNamesWithTPIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllSubnetworkConnectionNamesWithTPIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllSubnetworkConnections" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllSubnetworkConnections</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllSubnetworkConnectionsResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllSubnetworkConnections/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllSubnetworkConnectionsIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllSubnetworkConnectionsIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllSubnetworkConnectionsIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllSubnetworkConnectionsIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllSubnetworkConnectionsWithTP" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllSubnetworkConnectionsWithTP</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllSubnetworkConnectionsWithTPResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllSubnetworkConnectionsWithTP/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllSubnetworkConnectionsWithTPIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllSubnetworkConnectionsWithTPIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllSubnetworkConnectionsWithTPIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllSubnetworkConnectionsWithTPIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTopologicalLinkNames" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTopologicalLinkNames</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllTopologicalLinkNamesResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllTopologicalLinkNames/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTopologicalLinkNamesIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTopologicalLinkNamesIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllTopologicalLinkNamesIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllTopologicalLinkNamesIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTopologicalLinks" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTopologicalLinks</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllTopologicalLinksResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllTopologicalLinks/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTopologicalLinksIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTopologicalLinksIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllTopologicalLinksIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllTopologicalLinksIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTPPoolNames" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTPPoolNames</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllTPPoolNamesResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllTPPoolNames/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTPPoolNamesIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTPPoolNamesIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllTPPoolNamesIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllTPPoolNamesIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTPPools" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTPPools</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllTPPoolsResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllTPPools/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTPPoolsIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTPPoolsIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllTPPoolsIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getAllTPPoolsIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAssociatedTP" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAssociatedTP</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getAssociatedTPResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getAssociatedTP/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getMultiLayerSubnetwork" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getMultiLayerSubnetwork</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getMultiLayerSubnetworkResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getMultiLayerSubnetwork/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getRoute" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getRoute</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getRouteResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getRoute/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getRouteAndTopologicalLinks" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getRouteAndTopologicalLinks</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getRouteAndTopologicalLinksResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getRouteAndTopologicalLinks/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getSNC" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getSNC</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getSNCResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getSNC/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getSNCsByUserLabel" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getSNCsByUserLabel</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getSNCsByUserLabelResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getSNCsByUserLabel/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getTopologicalLink" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getTopologicalLink</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getTopologicalLinkResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getTopologicalLink/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getTPGroupingRelationships" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getTPGroupingRelationships</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getTPGroupingRelationshipsResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getTPGroupingRelationships/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getTPGroupingRelationshipsIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getTPGroupingRelationshipsIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getTPGroupingRelationshipsIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getTPGroupingRelationshipsIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getTPPool" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getTPPool</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/MultiLayerSubnetworkMgr/getTPPoolResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/MultiLayerSubnetworkMgr/getTPPool/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		</service>
+		
+		<service name="OperationsSystemMgr">
+		<messageReceivers>
+		<messageReceiver mep="http://www.w3.org/2006/01/wsdl/in-out" class="org.tmforum.tmf854.v1.ws.conf.OperationsSystemMgrMessageReceiverInOut"/>
+		</messageReceivers>
+		<parameter locked="false" name="ServiceClass">org.tmforum.tmf854.v1.ws.conf.OperationsSystemMgrSkeleton</parameter>
+		<operation name="getAllMDNames" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllMDNames</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllMDNamesResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllMDNames/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllMDNamesIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllMDNamesIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllMDNamesIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllMDNamesIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllMDs" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllMDs</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllMDsResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllMDs/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllMDsIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllMDsIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllMDsIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllMDsIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllMENamesPassingFilter" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllMENamesPassingFilter</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllMENamesPassingFilterResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllMENamesPassingFilter/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllMENamesPassingFilterIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllMENamesPassingFilterIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllMENamesPassingFilterIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllMENamesPassingFilterIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllMEsPassingFilter" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllMEsPassingFilter</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllMEsPassingFilterResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllMEsPassingFilter/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllMEsPassingFilterIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllMEsPassingFilterIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllMEsPassingFilterIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllMEsPassingFilterIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllMENamesWrtOS" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllMENamesWrtOS</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllMENamesWrtOSResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllMENamesWrtOS/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllMENamesWrtOSIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllMENamesWrtOSIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllMENamesWrtOSIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllMENamesWrtOSIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllMEsWrtOS" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllMEsWrtOS</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllMEsWrtOSResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllMEsWrtOS/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllMEsWrtOSIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllMEsWrtOSIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllMEsWrtOSIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllMEsWrtOSIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllOSNames" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllOSNames</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllOSNamesResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllOSNames/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllOSNamesIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllOSNamesIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllOSNamesIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllOSNamesIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllOSs" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllOSs</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllOSsResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllOSs/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllOSsIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllOSsIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllOSsIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllOSsIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllSNNamesWrtOS" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllSNNamesWrtOS</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllSNNamesWrtOSResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllSNNamesWrtOS/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllSNNamesWrtOSIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllSNNamesWrtOSIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllSNNamesWrtOSIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllSNNamesWrtOSIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllSNsWrtOSIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllSNsWrtOSIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllSNsWrtOSIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllSNsWrtOSIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllSNsWrtOS" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllSNsWrtOS</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllSNsWrtOSResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllSNsWrtOS/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTLNamesBetweenMDs" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTLNamesBetweenMDs</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllTLNamesBetweenMDsResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllTLNamesBetweenMDs/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTLsBetweenMDs" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTLsBetweenMDs</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllTLsBetweenMDsResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllTLsBetweenMDs/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTLNamesWrtOS" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTLNamesWrtOS</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllTLNamesWrtOSResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllTLNamesWrtOS/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTLNamesWrtOSIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTLNamesWrtOSIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllTLNamesWrtOSIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllTLNamesWrtOSIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTLsWrtOS" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTLsWrtOS</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllTLsWrtOSResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllTLsWrtOS/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTLsWrtOSIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTLsWrtOSIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllTLsWrtOSIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllTLsWrtOSIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTMDNamesWrtOS" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTMDNamesWrtOS</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllTMDNamesWrtOSResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllTMDNamesWrtOS/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTMDNamesWrtOSIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTMDNamesWrtOSIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllTMDNamesWrtOSIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllTMDNamesWrtOSIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTMDsWrtOS" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTMDsWrtOS</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllTMDsWrtOSResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllTMDsWrtOS/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTMDsWrtOSIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTMDsWrtOSIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllTMDsWrtOSIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllTMDsWrtOSIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTopLevelSubnetworkNames" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTopLevelSubnetworkNames</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllTopLevelSubnetworkNamesResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllTopLevelSubnetworkNames/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTopLevelSubnetworkNamesIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTopLevelSubnetworkNamesIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllTopLevelSubnetworkNamesIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllTopLevelSubnetworkNamesIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTopLevelSubnetworks" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTopLevelSubnetworks</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllTopLevelSubnetworksResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllTopLevelSubnetworks/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTopLevelSubnetworksIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTopLevelSubnetworksIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllTopLevelSubnetworksIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllTopLevelSubnetworksIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTopLevelTopologicalLinkNames" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTopLevelTopologicalLinkNames</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllTopLevelTopologicalLinkNamesResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllTopLevelTopologicalLinkNames/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTopLevelTopologicalLinkNamesIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTopLevelTopologicalLinkNamesIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllTopLevelTopologicalLinkNamesIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllTopLevelTopologicalLinkNamesIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTopLevelTopologicalLinks" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTopLevelTopologicalLinks</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllTopLevelTopologicalLinksResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllTopLevelTopologicalLinks/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTopLevelTopologicalLinksIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTopLevelTopologicalLinksIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getAllTopLevelTopologicalLinksIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getAllTopLevelTopologicalLinksIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getMD" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getMD</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getMDResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getMD/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getOS" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getOS</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getOSResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getOS/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getSubordinateOS" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getSubordinateOS</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getSubordinateOSResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getSubordinateOS/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getTopLevelTopologicalLink" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getTopLevelTopologicalLink</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/OperationsSystemMgr/getTopLevelTopologicalLinkResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/OperationsSystemMgr/getTopLevelTopologicalLink/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		</service>
+		
+		
+		<service name="ProtectionMgr">
+		<messageReceivers>
+		<messageReceiver mep="http://www.w3.org/2006/01/wsdl/in-out" class="org.tmforum.tmf854.v1.ws.conf.ProtectionMgrMessageReceiverInOut"/>
+		</messageReceivers>
+		<parameter locked="false" name="ServiceClass">org.tmforum.tmf854.v1.ws.conf.ProtectionMgrSkeleton</parameter>
+		<operation name="getAllEProtectionGroups" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllEProtectionGroups</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/ProtectionMgr/getAllEProtectionGroupsResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/ProtectionMgr/getAllEProtectionGroups/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllEProtectionGroupsIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllEProtectionGroupsIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/ProtectionMgr/getAllEProtectionGroupsIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/ProtectionMgr/getAllEProtectionGroupsIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllNUTTPNames" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllNUTTPNames</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/ProtectionMgr/getAllNUTTPNamesResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/ProtectionMgr/getAllNUTTPNames/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllNUTTPNamesIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllNUTTPNamesIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/ProtectionMgr/getAllNUTTPNamesIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/ProtectionMgr/getAllNUTTPNamesIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllPreemptibleTPNames" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllPreemptibleTPNames</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/ProtectionMgr/getAllPreemptibleTPNamesResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/ProtectionMgr/getAllPreemptibleTPNames/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllPreemptibleTPNamesIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllPreemptibleTPNamesIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/ProtectionMgr/getAllPreemptibleTPNamesIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/ProtectionMgr/getAllPreemptibleTPNamesIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllProtectedTPNames" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllProtectedTPNames</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/ProtectionMgr/getAllProtectedTPNamesResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/ProtectionMgr/getAllProtectedTPNames/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllProtectedTPNamesIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllProtectedTPNamesIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/ProtectionMgr/getAllProtectedTPNamesIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/ProtectionMgr/getAllProtectedTPNamesIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllProtectionGroups" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllProtectionGroups</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/ProtectionMgr/getAllProtectionGroupsResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/ProtectionMgr/getAllProtectionGroups/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllProtectionGroupsIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllProtectionGroupsIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/ProtectionMgr/getAllProtectionGroupsIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/ProtectionMgr/getAllProtectionGroupsIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getContainingPGNames" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getContainingPGNames</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/ProtectionMgr/getContainingPGNamesResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/ProtectionMgr/getContainingPGNames/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getEProtectionGroup" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getEProtectionGroup</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/ProtectionMgr/getEProtectionGroupResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/ProtectionMgr/getEProtectionGroup/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getProtectionGroup" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getProtectionGroup</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/ProtectionMgr/getProtectionGroupResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/ProtectionMgr/getProtectionGroup/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="retrieveESwitchData" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>retrieveESwitchData</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/ProtectionMgr/retrieveESwitchDataResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/ProtectionMgr/retrieveESwitchData/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="retrieveSwitchData" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>retrieveSwitchData</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/ProtectionMgr/retrieveSwitchDataResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/ProtectionMgr/retrieveSwitchData/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		</service>
+		
+		<service name="TransmissionDescriptorMgr">
+		<messageReceivers>
+		<messageReceiver mep="http://www.w3.org/2006/01/wsdl/in-out" class="org.tmforum.tmf854.v1.ws.conf.TransmissionDescriptorMgrMessageReceiverInOut"/>
+		</messageReceivers>
+		<parameter locked="false" name="ServiceClass">org.tmforum.tmf854.v1.ws.conf.TransmissionDescriptorMgrSkeleton</parameter>
+		<operation name="getAllTransmissionDescriptorNames" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTransmissionDescriptorNames</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/TransmissionDescriptorMgr/getAllTransmissionDescriptorNamesResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/TransmissionDescriptorMgr/getAllTransmissionDescriptorNames/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTransmissionDescriptorNamesIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTransmissionDescriptorNamesIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/TransmissionDescriptorMgr/getAllTransmissionDescriptorNamesIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/TransmissionDescriptorMgr/getAllTransmissionDescriptorNamesIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTransmissionDescriptors" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTransmissionDescriptors</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/TransmissionDescriptorMgr/getAllTransmissionDescriptorsResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/TransmissionDescriptorMgr/getAllTransmissionDescriptors/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAllTransmissionDescriptorsIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAllTransmissionDescriptorsIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/TransmissionDescriptorMgr/getAllTransmissionDescriptorsIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/TransmissionDescriptorMgr/getAllTransmissionDescriptorsIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAssociatedTPs" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAssociatedTPs</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/TransmissionDescriptorMgr/getAssociatedTPsResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/TransmissionDescriptorMgr/getAssociatedTPs/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getAssociatedTPsIterator" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getAssociatedTPsIterator</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/TransmissionDescriptorMgr/getAssociatedTPsIteratorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/TransmissionDescriptorMgr/getAssociatedTPsIterator/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		<operation name="getTransmissionDescriptor" mep="http://www.w3.org/2006/01/wsdl/in-out">
+		<actionMapping>getTransmissionDescriptor</actionMapping>
+		<outputActionMapping>tmf854.v1.ws/TransmissionDescriptorMgr/getTransmissionDescriptorResponse</outputActionMapping>
+		<faultActionMapping faultName="ProcessingFailureException">tmf854.v1.ws/TransmissionDescriptorMgr/getTransmissionDescriptor/Fault/ProcessingFailureException</faultActionMapping>
+		</operation>
+		</service>
+	-->
+
+	<service name="DiscoveryService" scope="application">
+		<messageReceivers>
+			<messageReceiver mep="http://www.w3.org/2006/01/wsdl/in-out"
+				class="org.tmforum.tmf854.v1.ws.dis.DiscoveryServiceMessageReceiverInOut" />
+		</messageReceivers>
+		<parameter locked="false" name="ServiceClass">
+			com.tellabs.tmfnbi.mtosi.server.service.discov.DiscoveryServiceImpl
+		</parameter>
+		<operation name="getAllCapabilities"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllCapabilities</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/DiscoveryService/getAllCapabilitiesResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/DiscoveryService/getAllCapabilities/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+	</service>
+
+	<service name="UserService" scope="application">
+		<messageReceivers>
+			<messageReceiver mep="http://www.w3.org/2006/01/wsdl/in-out"
+				class="org.tmforum.tmf854.v1.ws.user.UserServiceMessageReceiverInOut" />
+		</messageReceivers>
+		<parameter locked="false" name="ServiceClass">
+			com.tellabs.tmfnbi.mtosi.server.service.user.UserServiceImpl
+		</parameter>
+		<operation name="login"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>login</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/UserService/loginResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/UserService/login/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="logout"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>logout</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/UserService/logoutResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/UserService/logout/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+	</service>
+
+	<service name="PerformanceMgr" scope="application">
+		<messageReceivers>
+			<messageReceiver mep="http://www.w3.org/2006/01/wsdl/in-out"
+				class="org.tmforum.tmf854.v1.ws.perf.PerformanceMgrMessageReceiverInOut" />
+		</messageReceivers>
+		<parameter locked="false" name="ServiceClass">
+			com.tellabs.tmfnbi.mtosi.server.service.perf.PerformanceMgrImpl
+		</parameter>
+		<operation name="getTPHistoryPMData"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getTPHistoryPMData</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/PerformanceMgr/getTPHistoryPMDataResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/PerformanceMgr/getTPHistoryPMData/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getTPHistoryPMDataIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getTPHistoryPMDataIterator</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/PerformanceMgr/getTPHistoryPMDataIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/PerformanceMgr/getTPHistoryPMDataIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllCurrentPMData"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllCurrentPMData</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/PerformanceMgr/getAllCurrentPMDataResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/PerformanceMgr/getAllCurrentPMData/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+		<operation name="getAllCurrentPMDataIterator"
+			mep="http://www.w3.org/2006/01/wsdl/in-out">
+			<actionMapping>getAllCurrentPMDataIterator</actionMapping>
+			<outputActionMapping>
+				tmf854.v1.ws/PerformanceMgr/getAllCurrentPMDataIteratorResponse
+			</outputActionMapping>
+			<faultActionMapping
+				faultName="ProcessingFailureException">
+				tmf854.v1.ws/PerformanceMgr/getAllCurrentPMDataIterator/Fault/ProcessingFailureException
+			</faultActionMapping>
+		</operation>
+	</service>
+</serviceGroup>

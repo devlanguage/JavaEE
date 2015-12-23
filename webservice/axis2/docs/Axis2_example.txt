@@ -1,0 +1,82 @@
+################################################################################################
+########################      Axis2 Services Introduction               ########################
+################################################################################################
+######  1. The Directory Structure of axis2.war
+	axis2-web 
+	META-INF
+	WEB-INF
+	    classes 
+	    conf
+	        axis2.xml 
+	    lib
+	        activation.jar
+	        ...
+	        xmlSchema.jar
+	    modules
+	        modules.list 
+	        addressing.mar
+	        ...
+	        soapmonitor.mar
+	    services
+	        services.list
+	        aservice.aar
+	        ...
+	        version.aar
+	    web.xml
+
+
+
+
+################################################################################################
+########################      Deploy the first Web Servcie              ########################
+################################################################################################
+1. Create and compile the Java class. 
+2. Generate the WSDL using the command: 
+  %AXIS2_HOME%/bin/java2wsdl -cp . -cn example.HelloService -of HelloService.wsdl
+  Notes:
+    Once you've generated the WSDL file, you can make the changes you need. For example, 
+    you might add custom faults or change the name of the generated elements
+
+3. Directory Structure of HelloService
+   HelloService.aar
+      META-INF
+        services.xml
+      lib
+        XXX.jar
+      examples
+         HelloService.class
+4. Services.xml Contents.
+	<service name="HelloService" scope="application">
+	    <description>
+	        Hello Sample Service
+	    </description>
+	    <messageReceivers>
+	        <messageReceiver 
+	            mep="http://www.w3.org/2004/08/wsdl/in-only"
+	    class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver"/>
+	        <messageReceiver
+	            mep="http://www.w3.org/2004/08/wsdl/in-out"
+	    class="org.apache.axis2.rpc.receivers.RPCMessageReceiver"/>
+	    </messageReceivers>
+	    <parameter name="ServiceClass">
+	        examples.HelloService
+	    </parameter>
+	</service>
+5. Check if deployment is oK.
+  1) Deployed by viewing the list of services at:
+  		http://localhost:8080/axis2/services/listServices
+  2) Checkout the WSDL at:
+  		http://localhost:8080/axis2/services/HelloService?wsdl
+  3) Checkout the schema at:
+  		http://localhost:8080/axis2/services/HelloService?xsd
+  4) Test if HelloService is working
+  		http://localhost:8080/axis2/services/HelloService/getPrice?symbol=IBM
+  5) You will get the following response:
+  		<ns:getPriceResponse xmlns:ns="http://pojo.service.quickstart.samples/xsd"><ns:return>42</ns:return></ns:getPriceResponse>
+  6) If you invoke the update method as,
+  		http://localhost:8080/axis2/services/StockQuoteService/update?symbol=IBM&price=100
+################################################################################################
+########################      Building the Service using AXIOM          ########################
+################################################################################################
+ 
+ 

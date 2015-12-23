@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+  
+<hibernate-mapping  default-access="field">
+  <class name="org.basic.ddd.bloodloss.model.Account" table="ddd_account">
+    <id name="id" column="ID">
+      <generator class="native" />
+    </id>
+    <property name="accountId" column="account_id" not-null="true" unique="false" />
+    <property name="accountName" column="account_name" not-null="true" unique="false" />
+    <property name="balance" not-null="true" />
+  </class>
+  
+  <class name="org.basic.ddd.bloodloss.model.TransferTransaction" table="ddd_transfer_transaction">
+    <id name="id" column="ID">
+      <generator class="native" />
+    </id>
+    <property name="fromAccountId" not-null="true" />
+    <property name="toAccountId" not-null="true" />
+    <property name="amount" not-null="true" />
+    <property name="timestamp"  column="transfer_time" not-null="true" />
+  </class>
+  
+  <query name="Account.findByAccountId">
+   from Account where accountId = ?
+  </query>
+</hibernate-mapping>

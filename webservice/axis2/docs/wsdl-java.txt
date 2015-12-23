@@ -1,0 +1,71 @@
+####################################################################################################  
+#########################                        Java2WSDL                 #########################
+####################################################################################################
+Usage: java2wsdl [options] -cn <fully qualified class name>
+
+where [options] include:
+  -o <output location>                    output directory
+  -of <output file name>                  output file name for the WSDL
+  -sn <service name>                      service name
+  -l <soap address>                       address of the port for the WSDL
+  -cp <class path uri>                    list of classpath entries - (urls)
+  -tn <target namespace>                  target namespace for service
+  -tp <target namespace prefix>           target namespace prefix for service
+  -stn <schema target namespace>          target namespace for schema
+  -stp <schema target namespace prefix>   target namespace prefix for schema
+  -st <binding style>                     style for the WSDL
+  -u <binding use>                        use for the WSDL
+  -nsg <class name>                       fully qualified name of a class that implements NamespaceGenerator
+  -sg <class name>                        fully qualified name of a class that implements SchemaGenerator
+  -p2n [<java package>,<namespace] [<java package>,<namespace]...
+                                          java package to namespace mapping for argument and return types
+  -p2n [all, <namespace>]                 to assign all types to a single namespace
+  -efd <qualified/unqualified>            setting for elementFormDefault (defaults to qualified)
+  -afd <qualified/unqualified>            setting for attributeFormDefault (defaults to qualified)
+  -xc class1 -xc class2...                extra class(es) for which schematype must be generated.
+  -wv <1.1/2.0>                           wsdl version - defaults to 1.1 if not specified
+  -dlb                                    generate schemas conforming to doc/lit/bare style
+  
+####################################################################################################  
+#########################                        WSDL2Java                 #########################
+####################################################################################################
+Usage: WSDL2Java [options] -uri <url or path> : A url or path to a WSDL
+
+where [options] include:
+  -o <path>                Specify a directory path for the generated code.
+  -a                       Generate async style code only (Default: off).
+  -s                       Generate sync style code only (Default: off). Takes precedence over -a.
+  -p <pkg1>                Specify a custom package name for the generated code.
+  -l <language>            Valid languages are java and c (Default: java).
+  -t                       Generate a test case for the generated code.
+  -ss                      Generate server side code (i.e. skeletons) (Default: off).
+  -sd                      Generate service descriptor (i.e. services.xml). (Default: off). Valid with -ss.
+  -d <databinding>         Valid databinding(s):
+                        adb, xmlbeans, jibx, jaxme and jaxbri,none (Default: adb).
+  
+  -g                       Generates all the classes. Valid only with -ss.
+  -pn <port_name>          Choose a specific port when there are multiple ports in the wsdl.
+  -sn <service_name>       Choose a specific service when there are multiple services in the wsdl.
+  -u                       Unpacks the databinding classes
+  -r <path>                Specify a repository against which code is generated.
+  -ns2p ns1=pkg1,ns2=pkg2  Specify a custom package name for each namespace specified in the wsdls schema.
+  -ssi                     Generate an interface for the service implementation (Default: off).
+  -wv <version>            WSDL Version. Valid Options : 2, 2.0, 1.1
+  -S                       Specify a directory path for generated source
+  -R                       Specify a directory path for generated resources
+  -em                      Specify an external mapping file
+  -f                       Flattens the generated files
+  -uw                      Switch on un-wrapping.
+  -xsdconfig <file path>   Use XMLBeans .xsdconfig file. Valid only with -d xmlbeans.
+  -ap                      Generate code for all ports
+  -or                      Overwrite the existing classes
+  -b                       Generate Axis 1.x backword compatible code.
+  -sp                      Suppress namespace prefixes (Optimzation that reduces size of soap request/response)
+  -E<key> <value>          Extra configuration options specific to certain databindings. Examples:
+  			   -Ebindingfile <path>                   (for jibx) - specify the file path for the binding file
+  			   -Etypesystemname <my_type_system_name> (for xmlbeans) - override the randomly generated type system name
+  			   -Emp <package name> (for ADB) - extension mapper package name
+  			   -Eosv (for ADB) - off strict validation.
+  --noBuildXML             Dont generate the build.xml in the output directory
+  --noWSDL                 Dont generate WSDLs in the resources directory
+  --noMessageReceiver      Dont generate a MessageReceiver in the generated sources

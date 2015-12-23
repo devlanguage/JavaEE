@@ -1,0 +1,30 @@
+<person>
+  <day>
+    <num>0</num>
+    <compa>951.6615540676836</compa>
+    <compb>874.067575447301</compb>
+  </day>
+  <day>
+    <num>1</num>
+    <compa>973.23860310879</compa>
+    <compb>871.9120898453409</compb>
+  </day>
+  <day>
+    <num>2</num>
+    <compa>991.6563604654891</compa>
+    <compb>841.7189378558026</compb>
+  </day>
+  <day>
+    <num>3</num>
+    <compa>1002.6594170365507</compa>
+    <compb>796.2932971614908</compb>
+  </day>
+  <detail name="Mike">
+    Hello
+    <address id="10201012">
+      <province>Shan'Xi</province>
+      <city>Xi'An</city>
+      <street>Changan Road</street>
+    </address>
+  </detail>
+</person>

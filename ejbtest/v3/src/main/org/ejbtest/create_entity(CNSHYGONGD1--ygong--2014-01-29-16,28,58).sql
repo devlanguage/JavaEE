@@ -1,0 +1,202 @@
+
+set define off;
+create or replace 
+PROCEDURE drop_ejb_objects
+AS
+  v_sql VARCHAR2(2000);
+BEGIN
+--purge recyclebin
+
+  FOR l_obj IN (select * from user_constraints WHERE table_name LIKE 'EJB%' AND constraint_type='R')
+  LOOP
+    v_sql := 'ALTER TABLE '||l_obj.table_name ||' DROP CONSTRAINT '|| l_obj.constraint_name;
+    DBMS_OUTPUT.put_line(v_sql);
+    EXECUTE IMMEDIATE v_sql;
+  END LOOP;
+
+  FOR l_obj IN (select * from user_objects where object_name LIKE  'EJB%' AND 
+    object_type IN ('TABLE','SEQUENCE','PROCEDURE','PACKAGE','PACKAGE BODY') 
+     ORDER BY decode(object_type, 'TABLE', 10,  0) ASC, object_id DESC
+  ) LOOP
+  	IF l_obj.object_name = 'TABLE' THEN
+      v_sql := 'DROP '||l_obj.object_type || ' ' || l_obj.object_name ||' cascade constraint';  		
+  	ELSE
+  		v_sql := 'DROP '||l_obj.object_type || ' ' || l_obj.object_name;
+  	END IF;
+    DBMS_OUTPUT.put_line(v_sql);
+    EXECUTE IMMEDIATE v_sql;
+  END LOOP;
+END;
+/
+call drop_ejb_objects()
+/
+CREATE TABLE EJB_ENTITY_LIFECYCLE
+(
+  ID NUMBER(10, 0) NOT NULL,
+  NAME VARCHAR2(32 CHAR) NOT NULL
+, PRIMARY KEY  (    ID  )
+);
+--org.ejbtest.account.persistence.inheritance.joined
+
+CREATE TABLE EJB_IHT_JOINED_COMMODITY (
+  COMMODITY_ID NUMBER(10, 0) NOT NULL,
+  COMMODITY_NAME VARCHAR2(255 CHAR) NOT NULL
+, PRIMARY KEY(COMMODITY_ID  )
+);
+CREATE TABLE EJB_IHT_JOINED_HOME_APPLIANCE
+(
+  FK_COMMODITY_ID NUMBER(10, 0) NOT NULL,
+  PRICE NUMBER(19, 2)
+, PRIMARY KEY (FK_COMMODITY_ID )
+, FOREIGN KEY ( FK_COMMODITY_ID) REFERENCES EJB_IHT_JOINED_COMMODITY(COMMODITY_ID) ENABLE
+);
+CREATE TABLE EJB_IHT_JOINED_WASHER
+(
+  FK_COMMODITY_ID NUMBER(*, 0) NOT NULL,
+  CONTAINER VARCHAR2(30 CHAR)
+, PRIMARY KEY(FK_COMMODITY_ID)
+, FOREIGN KEY ( FK_COMMODITY_ID) REFERENCES EJB_IHT_JOINED_HOME_APPLIANCE(FK_COMMODITY_ID) ENABLE
+);
+--org.ejbtest.account.persistence.inheritance.singletable
+CREATE TABLE EJB_IHT_SingleTable_Biology(
+  DISCRIMINATOR VARCHAR2(30 CHAR) NOT NULL,
+  BLG_ID NUMBER(10, 0) NOT NULL,
+  BLG_SPEED NUMBER(5, 0),
+  PLT_CHLOROPHYL VARCHAR2(30 CHAR),
+  WMLN_COLOR VARCHAR2(30 CHAR)
+, PRIMARY KEY ( BLG_ID )
+, CONSTRAINT Crt_Biology_Type CHECK (DISCRIMINATOR IN ('Biology','Plant','Watermelon'))
+);
+--org.ejbtest.account.persistence.inheritance.tableperclass
+CREATE TABLE EJB_IHT_TablePerClass_Vehicle(
+  VH_ID NUMBER(*, 0) NOT NULL,
+  VH_SPEED NUMBER(5, 0)
+, PRIMARY KEY ( VH_ID )
+);
+CREATE TABLE EJB_IHT_TablePerClass_Car
+(
+  VH_ID NUMBER(*, 0) NOT NULL,
+  VH_SPEED NUMBER(5, 0),
+  CARD_SPEED VARCHAR2(30 CHAR)
+, PRIMARY KEY(VH_ID)
+);
+CREATE TABLE EJB_IHT_TablePerClass_Camion(
+  VH_ID NUMBER(*, 0) NOT NULL,
+  VH_SPEED NUMBER(5, 0),
+  CARD_SPEED VARCHAR2(30 CHAR),
+  CAMION_CONTAINER VARCHAR2(30 CHAR)
+, PRIMARY KEY ( VH_ID)
+);
+--org.ejbtest.account.persistence.manytomany
+
+CREATE SEQUENCE EJB_SEQ_Student_Id;
+CREATE SEQUENCE EJB_SEQ_Teacher_Id;
+
+CREATE TABLE EJB_RELATION_MTM_Student (
+  STU_ID NUMBER(10, 0) NOT NULL,
+  STU_NAME VARCHAR2(32 CHAR) NOT NULL
+, PRIMARY KEY ( STU_ID )
+);
+
+CREATE TABLE EJB_RELATION_MTM_Teacher (
+  THR_ID NUMBER(10, 0) NOT NULL,
+  THR_NAME VARCHAR2(32 CHAR) NOT NULL
+, PRIMARY KEY ( THR_ID )
+);
+CREATE TABLE EJB_RELATION_MTM_Teach_Stu (
+  TEACHER_ID NUMBER(10, 0) NOT NULL,
+  STUDENT_ID NUMBER(10, 0) NOT NULL
+, PRIMARY KEY  (    TEACHER_ID,    STUDENT_ID  )
+, FOREIGN KEY(  TEACHER_ID) REFERENCES EJB_RELATION_MTM_TEACHER(THR_ID) ENABLE
+, FOREIGN KEY(  STUDENT_ID) REFERENCES EJB_RELATION_MTM_STUDENT(STU_ID) ENABLE
+);
+--org.ejbtest.account.persistence.onetomany
+CREATE TABLE EJB_Relation_OTM_Order
+(
+  ORDER_ID NUMBER(10, 0) NOT NULL,
+  AMOUNT FLOAT(126),
+  CREATE_DATE TIMESTAMP(6)
+, PRIMARY KEY(ORDER_ID)
+);
+CREATE TABLE EJB_Relation_OTM_OrderItem
+(
+  Order_Item_ID NUMBER(10, 0) NOT NULL,
+  PRODUCTNAME VARCHAR2(255 CHAR),
+  PRICE FLOAT(126),
+  ORDER_ID NUMBER(10, 0) NOT NULL
+, PRIMARY KEY( Order_Item_ID  )
+, FOREIGN KEY( ORDER_ID) REFERENCES EJB_Relation_OTM_Order(ORDER_ID) ENABLE
+);
+--org.ejbtest.account.persistence.onetoone
+CREATE TABLE EJB_RELATION_OTO_IdCard(
+  CARD_ID NUMBER(10, 0) NOT NULL,
+  CARDNO VARCHAR2(18 CHAR) NOT NULL,
+  CARD_PERSON_ID NUMBER(10, 0) NOT NULL
+, PRIMARY KEY (  CARD_ID  )
+, UNIQUE ( CARDNO) ENABLE
+, UNIQUE(  CARD_PERSON_ID) ENABLE    
+);
+CREATE TABLE EJB_RELATION_OTO_PERSON
+(
+  PERSON_ID NUMBER(10, 0) NOT NULL,
+  PERSON_NAME VARCHAR2(32 CHAR) NOT NULL,
+  ENUM_SEX VARCHAR2(255 CHAR) NOT NULL,
+  AGE NUMBER(5, 0),
+  BIRTHDAY DATE,
+  CARD_ID NUMBER(10, 0) NOT NULL
+, PRIMARY KEY ( PERSON_ID )
+, UNIQUE(  CARD_ID) ENABLE
+);
+ALTER TABLE EJB_RELATION_OTO_IdCard ADD CONSTRAINT IdCard_FK_Person_ID
+  FOREIGN KEY(  CARD_PERSON_ID) REFERENCES EJB_RELATION_OTO_PERSON(PERSON_ID) ENABLE;
+ALTER TABLE EJB_RELATION_OTO_PERSON ADD CONSTRAINT Person_FK_Card_ID
+  FOREIGN KEY(  CARD_ID) REFERENCES EJB_RELATION_OTO_IdCard(CARD_ID) ENABLE;
+--org.ejbtest.account.persistence.query
+CREATE TABLE EJB_Query_Table_Id_Generator(
+    GEN_NAME VARCHAR2(200),
+    GEN_VALUE VARCHAR2(100)
+);
+INSERT INTO EJB_QUERY_TABLE_ID_GENERATOR (GEN_NAME,GEN_VALUE) VALUES ('EJB_Query_Department_ID','1');
+
+CREATE SEQUENCE EJB_SEQ_ACC_ID INCREMENT BY 1 MAXVALUE 999999999999999999999999999 MINVALUE 1 CACHE 20 ;
+CREATE TABLE EJB_QUERY_DEPARTMENT
+(
+  DEP_ID NUMBER(10, 0) NOT NULL,
+  DEP_NAME VARCHAR2(200 CHAR),
+  END_DATE DATE,
+  START_DATE TIMESTAMP(6)
+, PRIMARY KEY (   DEP_ID  )
+);
+ 
+CREATE TABLE EJB_QUERY_ACCOUNT
+(
+  ACC_ID NUMBER(10, 0) NOT NULL,
+  EMAIL_ADDRESS VARCHAR2(100 CHAR),
+  FIRST_NAME VARCHAR2(100 CHAR) NOT NULL,
+  LAST_NAME VARCHAR2(100 CHAR),
+  DEPARTMENT_ID NUMBER(10, 0)
+, PRIMARY KEY  (    ACC_ID  )
+, FOREIGN KEY(  DEPARTMENT_ID)
+    REFERENCES EJB_QUERY_DEPARTMENT(DEP_ID) ENABLE
+, UNIQUE(  FIRST_NAME) ENABLE
+);
+  
+INSERT INTO ejb_query_department(dep_id, dep_name, start_date) VALUES(1, 'HR', systimestamp);
+INSERT INTO ejb_query_department(dep_id, dep_name, start_date) VALUES(2, 'R&D', systimestamp);
+INSERT INTO ejb_query_department(dep_id, dep_name, start_date) VALUES(3, 'Opeartion', systimestamp);
+INSERT INTO EJB_QUERY_ACCOUNT(ACC_ID,EMAIL_ADDRESS,FIRST_NAME,LAST_NAME,DEPARTMENT_ID) VALUES(EJB_SEQ_ACC_ID.nextval, 'test1@test.com', 'test1', 'gong', 1);
+INSERT INTO EJB_QUERY_ACCOUNT(ACC_ID,EMAIL_ADDRESS,FIRST_NAME,LAST_NAME,DEPARTMENT_ID) VALUES(EJB_SEQ_ACC_ID.nextval, 'test2@test.com', 'test2', 'gong', 1);
+INSERT INTO EJB_QUERY_ACCOUNT(ACC_ID,EMAIL_ADDRESS,FIRST_NAME,LAST_NAME,DEPARTMENT_ID) VALUES(EJB_SEQ_ACC_ID.nextval, 'test3@test.com', 'test3', 'gong', 3);
+
+/*
+select * from (
+  select row_.*, rownum rownum_ 
+  from ( select dep_id, dep_name, end_date, start_date  from ejb_query_department 
+  ) row_ where rownum <= 5
+) where rownum_ > 2
+
+select sql_text from v$sql 
+    where hash_value in(
+        select sql_hash_value from v$session where sid in
+(select session_id from v$locked_object))
+*/

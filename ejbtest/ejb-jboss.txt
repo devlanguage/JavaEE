@@ -1,0 +1,120 @@
+####################################
+Config JBoss CMP
+###################################
+1、将文件JBOSS_INSTALL/docs/examples/jca/mysql-ds.xml拷贝到JBOSS_INSTALL\server\default\deploy下面 
+   修改如下： 
+	MySqlDS 
+	jdbc:mysql://localhost:3306/jbossdb 
+	com.mysql.jdbc.Driver 
+	root 
+	123 
+2、将文件JBOSS_INSTALL/docs/examples/jms/mysql-jdbc2-service.xml拷贝到JBOSS_INSTALL/server/default/deploy/jms下 
+   修改如下： 
+  	name="jboss.mq:service=PersistenceManager"> 
+  	name="ConnectionManager">jboss.jca:service=DataSourceBinding,name=MySqlDS 
+  另外这个文件71行修改： 
+	CREATE_TX_TABLE = CREATE TABLE JMS_TRANSACTIONS ( TXID INTEGER PRIMARY KEY NOT NULL ) 
+3、修改JBOSS_INSTALL/server/default/conf/standardjaws.xml如下： 
+	java:/MysqlDS 
+	mySQL 
+4、修改JBOSS_INSTALL/server/default/deploy/jms/hsqldb-jdbc-state-service.xml如下： 
+     name="ConnectionManager">jboss.jca:service=DataSourceBinding,name=MysqlDS 
+5、修改JBOSS_INSTALL/server/default/deploy/ejb-deployer.xml如下： 
+     name="jboss.ejb:service=EJBTimerService,persistencePolicy=database"> 
+     jboss.jca:service=DataSourceBinding,name=MysqlDS 
+     name="DatabasePersistencePlugin">org.jboss.ejb.txtimer.GeneralPurposeDatabasePersistencePlugin  
+6、修改JBOSS_INSTALL/server/default/config/standardjbosscmp-jdbc.xml如下： 
+	 java:/MysqlDS 
+7、修改JBOSS_INSTALL/server/default/deploy/uuid-key-generator.sar下面的META-INF下面jboss-service.xml如下： 
+	 jboss.jca:service=DataSourceBinding,name=MysqlDS 
+
+###################################
+保证oracle支持XA（分布式事务）事务
+##################################33
+解决方法是运行 Oracle 安装中包含的两个脚本。这很可能需要通过您的 Oracle DBA 来执行，您必须以 SYSOPER 或 SYSDBA 身份登录到 Oracle，以拥有足够的权限来运行这些脚本。这些脚本是：
+
+directory: <ORACLE_HOME>\javavm\install 
+file: initxa.sql 
+file: initjvm.sql 
+initxa.sql 脚本配置 XA 数据库。一旦它成功运行，您的数据库就被配置为 XA。该脚本在您第一次运行的时候可能成功。不幸的是，由于一些数据库的内存空间太小，该脚本也可能无法成功运行。为修改该问题，运行 initjvm.sql 脚本。它可能也会运行失败，但是在失败时，该脚本会说明哪个参数需要调整。参数被保存在该文件中：
+
+directory: <ORACLE_HOME>\database 
+file: init<DATABASE_SID>.ora 
+这个表说明了有两个参数的值特别需要增大。对于特定的数据库配置可能需要调整不同的参数。
+
+Oracle Initialization Values
+
+Parameter Name Minimum Value 
+java_pool_size 12000000 
+shared_pool_size 24000000 
+
+一旦 initjvm.sql 运行成功，则 initxa.sql 就应该也可以成功运行。Oracle 数据库需要重新启动，以使修改生效。您可以重新启动 WebSphere Studio 测试服务器并重新尝试运行该范例。
+
+查询oracle安装路径：
+
+windows:在命令行用echo %ORACLE_HOME%
+ 
+
+####################################
+群集EJB3
+####################################
+首先我门先启动JBOSS.下面我用%JBOSS%来代替JBOSS的跟目录
+在%JBOSS%\bin目录下先创建一个RUN.BAT的快捷方式然后,鼠标右击属性给新做的快捷方式加2个参数
+	第1个参数是-C ALL #目的是让他启动ALL服务,
+	第2个参数是-B 192.168.0.60  #都开出来了把是本机IP只有加了IP在可以让他被在局域内部被访问到.
+我做的是3台计算机的群集,所以3太机子上的JBOSS都的这么写注意写对IP.然后启动JBOSS OK环境就算OK了然后开始写EJB3
+public interface AccountService {
+
+    public void hello(String guest, int number);
+}
+
+@Stateless
+@Remote( { AccountService.class })
+@Clustered
+public class AccountServiceImpl implements AccountService {
+    public void hello(String guest, int number) {
+
+        System.out.println("hello, friends:" + guest + "-" + number);
+    }
+}
+
+public class EjbFactory {
+    public static Object getEJB(String jndipath) {
+        try {
+            Properties props = new Properties();
+
+            props.setProperty("java.naming.factory.initial",
+                    "org.jnp.interfaces.NamingContextFactory");
+            props.setProperty("java.naming.provider.url",
+                    "192.168.0.149:1099,192.168.0.60,192.168.0.51:1099");
+            props.setProperty("java.naming.factory.url.pkgs",
+                            "org.jboss.naming:org.jnp.interfaces");
+            props.setProperty("jnp.disableDiscovery", "true");
+            //         
+            // props.setProperty("java.naming.factory.initial",
+            // "com.sun.enterprise.naming.SerialInitContextFactory");
+            // props.setProperty("java.naming.factory.url.pkgs", "com.sun.enterprise.naming");
+            // props.setProperty("java.naming.provider.url", "192.168.0.251:3700");
+            // props.setProperty("java.naming.factory.state",
+            // "com.sun.corba.ee.impl.presentation.rmi.JNDIStateFactoryImpl");
+            //           
+            InitialContext ctx = new InitialContext(props);
+            return ctx.lookup(jndipath);
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+}
+
+public class AccountServiceTester {
+
+    public static void main(String[] args) {
+
+        AccountService helloRemote = (AccountService) EjbFactory
+                .getEJB("AccountService/remote");
+        for (int i = 0; i < 10; i++) {
+            helloRemote.hello("Zhangsan", i);
+        }
+    }
+}

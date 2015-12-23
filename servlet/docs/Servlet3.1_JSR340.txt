@@ -1,0 +1,239 @@
+  
+JSRCommunityExpert Group
+Summary  |  Proposal  |  Detail (Summary & Proposal)
+
+http://jcp.org/en/jsr/detail?id=340
+
+JSRs: Java Specification Requests
+JSR 340: Java Servlet 3.1 Specification
+
+
+Stage Access  Start Finish
+Final Release Download page 28 May, 2013   
+Final Approval Ballot View results  16 Apr, 2013  29 Apr, 2013
+Proposed Final Draft  Download page 15 Mar, 2013   
+Public Review Ballot  View results  12 Feb, 2013  25 Feb, 2013
+Public Review Download page 11 Jan, 2013  11 Feb, 2013
+Early Draft Review  Download page 02 Jul, 2012  01 Aug, 2012
+Expert Group Formation    15 Mar, 2011  31 Dec, 2011
+JSR Review Ballot View results  01 Mar, 2011  14 Mar, 2011
+Status: Active
+JCP version in use: 2.8
+Java Specification Participation Agreement version in use: 2.0
+
+
+Description:
+This JSR is to develop the next version of Java Servlets - Java Servlets 3.1 
+
+Expert Group Transparency:
+  Public Communications
+  Issue Tracking
+
+Team
+Specification Leads
+  Shing Wai Chan  Oracle
+  Rajiv Mordani Oracle
+
+Expert Group
+  Adobe Systems Inc.
+: Seth Hodgson  Caucho Technology, Inc
+: Alex Rojkov Fujitsu Limited
+: Minoru Nitta
+  Google Inc.
+: Wenbo Zhu Richard Hightower IBM
+: Robert Goff
+  Oracle
+: Shing Wai Chan  Oracle
+: Rajiv Mordani Pramati Technologies
+: Deepak Anupalli
+  Pramati Technologies
+: Ramesh PVK  RedHat
+: Rémy Maucherat  TmaxSoft, Inc.
+: Euigeun Chung
+  VMware
+: Mark Thomas Wilkins, Gregory John
+Updates to the Original JSR
+
+The following information has been updated from the original JSR proposal.
+
+2013.03.05:
+2.18 Please provide a description of the business terms for the Specification, RI and TCK that will apply when this JSR is final.
+
+Specification license
+RI license
+Commercial use
+The RI will be available for commercial use under the CDDL 1.1 open source license, the GPLv2 with Classpath Exception open source license, or this RI license.
+
+Non-Commercial use
+The RI will be available for non-Commercial use under the CDDL 1.1 open source license or the GPLv2 with Classpath Exception open source license.
+
+TCK license
+Commercial use
+The TCK will be available for commercial use under this TCK license.
+
+Non-Commercial use
+As required by the Java Specification Participation Agreement (JSPA), the TCK will be licensed at no charge without support to qualified not-for-profit. The Compatibility Testing Scholarship Program will verify such qualification. Support may also be provided at no charge with approval of the scholarship board. For more information, please refer to:
+http://www.oracle.com/technetwork/java/index-137188.html
+
+2012.07.05:
+The Specification Lead and Expert Group have moved JSR 340 to JCP 2.8.
+2012.04.06:
+2.13 Please describe the anticipated schedule for the development of this specification.
+
+February 2011 Expert group formed
+Q3 2011 Early Draft review
+Q3 2012 Public Review
+Q4 2012 Proposed Final Draft
+Q1 2013 Final release
+Original Java Specification Request (JSR)
+
+Identification | Request | Contributions 
+
+
+Section 1. Identification
+
+Submitting Member: Oracle
+
+Name of Contact Person: Rajiv Mordani
+
+E-Mail Address: rajiv.mordani@oracle.com
+
+Telephone Number: +1 408 276 7204
+
+Fax Number: +1 408 276 4185
+
+
+Specification Lead: Shing Wai Chan, Rajiv Mordani
+
+E-Mail Address: shing.wai.chan@oracle.com, rajiv.mordani@oracle.com
+
+Telephone Number: +1 408 276 5598, +1 408 276 7204
+
+Fax Number: -, +1 408 276 4185
+
+
+Initial Expert Group Membership:
+
+ 
+
+Supporting this JSR:
+
+Google
+Redhat
+Greg Wilkins
+
+
+
+Section 2: Request
+
+2.1 Please describe the proposed Specification:
+
+This JSR is to develop the next version of Java Servlets - Java Servlets 3.1 Specification. In Servlet 3.0 we made a lot of progress in our goal towards Ease-of-Development, pluggability and security enhancements in the web tier. As a follow up to the release, in this release we plan to address the following areas of the Java Web container:
+
+Cloud support: 
+    The main theme for Java EE 7 is to optimize the Java EE platform in the cloud. In developing the servlet specification we will take into consideration any requirements from the platform to optimize the Platform as a Service (PasS) model for web applications.
+Multi-tenancy support
+   In the PaaS model a single application can be used by multiple tenants. To support this in the web container we need to take into account things like security, session state, resources and other such isolation requirements for web applications that are multi-tenant aware and running in the cloud.
+Asynchronous IO and improved request processing based on NIO2 in the Java Platform.
+Ease-of-Development
+  Build on the effort from Servlet 3.0 and focus on making it easier to build asynchronous applications. Build on the asynchronous support in Servlet 3.0
+Support and utilize Java EE concurrency APIs
+   Utilize the Java EE concurrency APIs for asynchronous support.
+Security improvements
+   Build on the security enhancements in Servlet 3.0
+Extend pluggability support
+   Build on the support added in Servlet 3.0
+Enable support for WebSockets and other such protocols that work on / do initial handshake over HTTP
+    Add necessary support to enable WebSocket and other protocols that do initial handshake over HTTP or work on top of HTTP in the Servlet API by adding ability upgrade the underlying socket protocol. Add support where possible to enable such functionality in the web container so we can build easier to use higher level protocol support for things like WebSockets.
+2.2 What is the target Java platform? (i.e., desktop, server, personal, embedded, card, etc.)
+
+This specification is targeted for Java EE 7 or higher platforms.
+
+2.3 The Executive Committees would like to ensure JSR submitters think about how their proposed technology relates to all of the Java platform editions. Please provide details here for which platform editions are being targeted by this JSR, and how this JSR has considered the relationship with the other platform editions.
+
+This specification targets the Java EE 7 Platform. It will be based on the corresponding release of the Java SE platform.
+
+2.4 Should this JSR be voted on by both Executive Committees?
+
+No. Just the SE/EE Executive Committee.
+
+2.5 What need of the Java community will be addressed by the proposed specification?
+
+See 2.1
+
+2.6 Why isn't this need met by existing specifications?
+
+This specification is an update to the existing Servlet specification.
+
+2.7 Please give a short description of the underlying technology or technologies:
+
+The specification would depend on JSR 236 - Concurrency Utilities for Java EE and other features from the Java Platform like NIO2.
+
+2.8 Is there a proposed package name for the API Specification? (i.e., javapi.something, org.something, etc.)
+
+javax.servlet.*
+
+2.9 Does the proposed specification have any dependencies on specific operating systems, CPUs, or I/O devices that you know of?
+
+No.
+
+2.10 Are there any security issues that cannot be addressed by the current security model?
+
+No.
+
+2.11 Are there any internationalization or localization issues?
+
+This JSR will use the I18N support in Java SE.
+
+2.12 Are there any existing specifications that might be rendered obsolete, deprecated, or in need of revision as a result of this work?
+
+This is an update to Servlets 3.0 (JSR 315).
+
+2.13 Please describe the anticipated schedule for the development of this specification.
+
+We hope to deliver the final specification, reference implementation, and TCK in the Q3 of 2012. A rough schedule would be:
+
+February 2011 Expert group formed
+Q3 2011 Early Draft review
+Q1 2012 Public Review
+Q3 2012 Final release
+Note that this section of the JSR has been updated from this original proposal.
+
+2.14 Please describe the anticipated working model for the Expert Group working on developing this specification.
+
+The primary means of communication will be email, with conference calls and face-to-face meetings scheduled as needed. We will solicit feedback from the community and leverage the open source development model.
+
+2.15 Provide detailed answers to the transparency checklist, making sure to include URLs as appropriate:
+
+We will leverage the collaborative tools provided by the java.net infrastructure. Therein, we will have a public issue tracker for tracking most issues. We will have an EG-private mailing list. The reference implementation will be developed entirely in the public GlassFish project on java.net. The TCK will be developed privately by Oracle. We will leverage the Early Draft feature of JCP 2.6 to allow the public to see the spec in progress. - The public can read the names of the people on the Expert Group. This information will be on on the project page for the JSR. It will also be part of every specification draft. - The Expert Group business is regularly reported on a publicly readable alias. The Expert Group will conduct business on a publicly readable alias. A private alias will be used only for EG-confidential information, as needed. - The schedule for the JSR is publicly available, it's current, and I update it regularly. The schedule will be available on the project page for the JSR. - The public can read/write to a wiki for my JSR. We'll use a public mailing list for comments. - I read and respond to posts on the discussion board for my JSR on jcp.org. We'll track such discussions and respond to them or redirect users to the public comment mailing list. - There is an issue-tracker for my JSR that the public can read. Yes, it will be accessible from the JSR project page. - I have spoken at conferences and events about my JSR recently. No - I am using open-source processes for the development of the RI and/or TCK. Yes, the Reference Implementation will be developed as part of Project GlassFish. The final RI will be available from the download page. - The Update tab for my JSR has links to and information about all public communication mechanisms and sites for the development of my JSR. It will point to the project page for the JSR.
+
+2.16 Please describe how the RI and TCK will de delivered, i.e. as part of a profile or platform edition, or stand-alone, or both. Include version information for the profile or platform in your answer.
+
+The RI will be delivered as part of the Java EE 7 RI. The TCK will be delivered both standalone and as part of the Java EE 7 TCK. See the business terms for details.
+
+2.17 Please state the rationale if previous versions are available stand-alone and you are now proposing in 2.13 to only deliver RI and TCK as part of a profile or platform edition (See sections 1.1.5 and 1.1.6 of the JCP 2 document).
+
+N/A
+
+2.18 Please provide a description of the business terms for the Specification, RI and TCK that will apply when this JSR is final.
+
+
+Note that this information has been updated from this original proposal.
+Specification license
+Reference Implementation license
+Technology Compatibility Kit license
+
+
+
+
+
+Section 3: Contributions
+
+3.1 Please list any existing documents, specifications, or implementations that describe the technology. Please include links to the documents if they are publicly available.
+
+JSR 315
+
+3.2 Explanation of how these items might be used as a starting point for the work.
+
+This is an update to Servlets 3.0 (JSR 315).
+

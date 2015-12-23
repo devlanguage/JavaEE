@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources>
+	<local-tx-datasource>
+		<jndi-name>OracleDS1</jndi-name>
+		<connection-url>jdbc:oracle:thin:@sunshapp10:1521:EMS7100S</connection-url>
+		<driver-class>oracle.jdbc.OracleDriver</driver-class>
+		<user-name>ygong1</user-name>
+		<password>tellabs</password>
+		<exception-sorter-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleExceptionSorter
+		</exception-sorter-class-name>
+		<valid-connection-checker-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleValidConnectionChecker
+		</valid-connection-checker-class-name>
+		<!--
+			sql to call when connection is created <new-connection-sql>some arbitrary sql</new-connection-sql>
+		-->
+
+		<!--
+			sql to call on an existing pooled connection when it is obtained from pool - the OracleValidConnectionChecker is
+			prefered <check-valid-connection-sql>some arbitrary sql</check-valid-connection-sql>
+		-->
+		<metadata>
+			<type-mapping>Oracle9i</type-mapping>
+		</metadata>
+	</local-tx-datasource>
+	<local-tx-datasource>
+		<jndi-name>OracleDS2</jndi-name>
+		<connection-url>jdbc:oracle:thin:@sunshapp10:1521:EMS7100S</connection-url>
+		<driver-class>oracle.jdbc.OracleDriver</driver-class>
+		<user-name>ygong1</user-name>
+		<password>tellabs</password>
+		<exception-sorter-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleExceptionSorter
+		</exception-sorter-class-name>
+		<valid-connection-checker-class-name>org.jboss.resource.adapter.jdbc.vendor.OracleValidConnectionChecker
+		</valid-connection-checker-class-name>
+		<!--
+			sql to call when connection is created <new-connection-sql>some arbitrary sql</new-connection-sql>
+		-->
+
+		<!--
+			sql to call on an existing pooled connection when it is obtained from pool - the OracleValidConnectionChecker is
+			prefered <check-valid-connection-sql>some arbitrary sql</check-valid-connection-sql>
+		-->
+		<metadata>
+			<type-mapping>Oracle9i</type-mapping>
+		</metadata>
+	</local-tx-datasource>
+</datasources>

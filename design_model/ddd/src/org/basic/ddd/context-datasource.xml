@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+          "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="dsDbcpHsql" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="url" value="jdbc:hsqldb:mem:banking" />
+		<property name="driverClassName" value="org.hsqldb.jdbcDriver" />
+		<property name="username" value="sa" />
+		<property name="password" value="" />
+	</bean>
+	<bean id="dataSource" class="org.logicalcobwebs.proxool.ProxoolDataSource">
+	<!-- private int loginTimeout;
+	private String alias;
+	private String driver;
+	private String fatalSqlExceptionWrapperClass;
+	private long houseKeepingSleepTime;
+	private String houseKeepingTestSql;
+	private long maximumActiveTime;
+	private int maximumConnectionCount;
+	private long maximumConnectionLifetime;
+	private int minimumConnectionCount;
+	private long overloadWithoutRefusalLifetime;
+	private String password;
+	private int prototypeCount;
+	private long recentlyStartedThreshold;
+	private int simultaneousBuildThrottle;
+	private String statistics;
+	private String statisticsLogLevel;
+	private boolean trace;
+	private String driverUrl;
+	private String user;
+	private boolean verbose;
+	private boolean jmx;
+	private String jmxAgentId;
+	private boolean testBeforeUse;
+	private boolean testAfterUse;
+	private Properties delegateProperties;
+	private String fatalSqlExceptionsAsString;
+	 -->
+		<property name="driverUrl" value="jdbc:oracle:thin:@sunshapp10:1521:EMS7100S" />
+		<property name="driver" value="oracle.jdbc.OracleDriver" />
+		<property name="user" value="ygong1" />
+		<property name="password" value="tellabs" />
+	</bean>
+</beans>

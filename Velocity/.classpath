@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="source/ui/velocity/src"/>
+	<classpathentry kind="src" path="source/ui/struts1/src"/>
+	<classpathentry excluding="org/apache/struts/apps/mailreader/plugin/MemoryDatabasePlugIn.java|org/apache/struts/apps/mailreader/" kind="src" path="source/ui/struts1/mailreader/WEB-INF/src/java"/>
+	<classpathentry kind="src" path="source/ui/velocity/examples/app_example1"/>
+	<classpathentry kind="src" path="source/ui/velocity/examples/xmlapp_example"/>
+	<classpathentry kind="src" path="source/ui/velocity/examples/event_example"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk165"/>
+	<classpathentry kind="lib" path="G:/OpenSource/CommonJars/servlet-api.jar"/>
+	<classpathentry kind="lib" path="source/ui/velocity/build/lib/velocity-dep-1.5.jar"/>
+	<classpathentry kind="lib" path="source/ui/velocity/build/lib/anakia-1.0.jar"/>
+	<classpathentry kind="lib" path="source/ui/velocity/build/lib/antlr-2.7.5.jar"/>
+	<classpathentry kind="lib" path="source/ui/velocity/build/lib/avalon-logkit-2.1.jar"/>
+	<classpathentry kind="lib" path="source/ui/velocity/build/lib/commons-collections-3.1.jar"/>
+	<classpathentry kind="lib" path="source/ui/velocity/build/lib/commons-lang-2.1.jar"/>
+	<classpathentry kind="lib" path="source/ui/velocity/build/lib/crimson-1.1.3.jar"/>
+	<classpathentry kind="lib" path="source/ui/velocity/build/lib/jdom-1.0.jar"/>
+	<classpathentry kind="lib" path="source/ui/velocity/build/lib/junit-4.3.1.jar"/>
+	<classpathentry kind="lib" path="source/ui/velocity/build/lib/log4j-1.2.12.jar"/>
+	<classpathentry kind="lib" path="source/ui/velocity/build/lib/oro-2.0.8.jar"/>
+	<classpathentry kind="lib" path="source/ui/velocity/build/lib/servletapi-2.3.jar"/>
+	<classpathentry kind="lib" path="source/ui/velocity/build/lib/velocity-dvsl-1.0.jar"/>
+	<classpathentry kind="lib" path="source/ui/velocity/build/lib/werken-xpath-0.9.4.jar"/>
+	<classpathentry kind="lib" path="source/ui/velocity/build/lib/xalan-2.7.0.jar"/>
+	<classpathentry kind="lib" path="source/ui/velocity/build/lib/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="source/ui/velocity/build/lib/xml-apis.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

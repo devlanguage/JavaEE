@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+    version="2.5">
+    <context-param>
+        <description>context-param元素声明应用范围内的所有组件(servlet和JSP页面)都可用的上下文参数</description>
+        <param-name>servlet-context-param1</param-name>
+        <param-value>servlet-context-param-value1</param-value>
+    </context-param>
+    <listener>
+        <description>注册一个监听器, startup with AppServer</description>
+        <listener-class>org.web.listener.BookServletContextListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>org.web.listener.BookServletRequestListener</listener-class>
+    </listener>
+
+    <!-- 将过滤器映像至一个URI模式, 或者映像至一个Servlet -->
+    <filter>
+        <filter-name>ExpiredBookFilter</filter-name>
+        <filter-class>org.web.filter.ExpiredBookFilter</filter-class>
+        <init-param>
+            <param-name>filter-param-name-1</param-name>
+            <param-value>filter-param-name-value-1</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>ExpiredBookFilter</filter-name>
+        <servlet-name>BookDispatcherServlet</servlet-name>
+        <url-pattern>*.filter,*.test</url-pattern>
+        <!-- 
+            dispatcher: REQUEST, INCLUDE, FORWARD,ERROR 
+            没有dispatcher元素，默认是REQUEST，即只有从客户端来的请求，才被
+        -->
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>org.web.servlet.LoginServlet</servlet-class>
+        <init-param>
+            <param-name>servlet-param-name-1</param-name>
+            <param-value>servlet-param-name-value1</param-value>
+        </init-param>
+        <!-- 如果为负整数，web server 自行选择装载时机
+            如果为非负整数， 数字小的先装载          -->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>*.login</url-pattern>
+    </servlet-mapping>
+</web-app>

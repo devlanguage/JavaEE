@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<project name="Common" default="deploy">
+
+
+	<property name="dir.output.src" value="${dir.output}/src" />
+	<property name="dir.output.wsstub" value="${dir.output}/wsstub" />
+	<property name="dir.output.wsstub.wsdls" value="${dir.output.wsstub}/wsdls" />
+	<property name="dir.output.wsstub.resources" value="${dir.output.wsstub}/resources" />
+	<property name="dir.output.dest" value="${dir.output}/dest" />
+	<property name="dir.output.stage" value="${dir.output}/stage" />
+	<property name="dir.output.stage.meta-inf" value="${dir.output}/stage/META-INF" />
+	<property name="dir.deploy" value="${env.AXIS2_HOME}/repository/services" />
+
+	<!--
+	Inheritted Properties:
+		<echo message="${top}"/>           ../
+		<echo message="${service.name}"/>    common
+		<echo message="${service.target.namespace.prefix}"/>	http://axis2.basic.org/service/helloadb
+		<echo message="${dir.output}"/>     output/common
+		<echo message="${dir.src.main}"/>   common/src/main
+		<echo message="${dir.src.test}"/>   common/src/test
+	-->
+	<property name="current" location="." />
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: init                      
+         - - - - - - - - - - - - - - - - - -->
+
+	<target name="init" depends="clean">
+
+		<mkdir dir="${dir.output.dest}" />
+		<mkdir dir="${dir.output.stage.meta-inf}" />
+
+		<copy todir="${dir.output.src}">
+			<fileset dir="${dir.src.main}" includes="**/**.*">
+			</fileset>
+		</copy>
+		<copy todir="${dir.output.stage}">
+			<fileset dir="${dir.src.main}" includes="**/**.*" excludes="**/*.java" />
+			<fileset dir="${dir.config}">
+				<patternset>
+					<include name="log4j.properties" />
+					<include name="common-logging.properties" />
+				</patternset>
+			</fileset>
+		</copy>
+	</target>
+	<!-- ================================= 
+          target: compile              
+         ================================= -->
+	<target name="compile" depends="init" description="--> description">
+		<javac destdir="${dir.output.dest}"
+		       srcdir="${dir.output.src}"
+		       classpathref="axis2.classes.compile">
+		</javac>
+		<copy todir="${dir.output.stage}">
+			<fileset dir="${dir.output.dest}" includes="**/*.class" />
+		</copy>
+	</target>
+
+	<!-- ================================= 
+          target: package              
+         ================================= -->
+	<target name="package" depends="compile" description="--> description">
+		<jar destfile="${dir.output}/axis2-${service.name}.jar">
+			<fileset dir="${dir.output.stage}" includes="**/*.*" />
+		</jar>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+    target: rebuild                      
+   - - - - - - - - - - - - - - - - - -->
+	<target name="rebuild" depends="package">
+		<copy todir="${dir.lib.dependency}" file="${dir.output}/axis2-${service.name}.jar" overwrite="true" />
+	</target>
+	<!-- - - - - - - - - - - - - - - - - - 
+    target: deploy                      
+   - - - - - - - - - - - - - - - - - -->
+	<target name="deploy" depends="package">
+		<echo message="Service ${service.class.fullname} has deployed successfully in the directory ${dir.output}" />
+	</target>
+	<target name="clean" description="--> description">
+		<delete dir="${dir.output.dest}" />
+		<delete dir="${dir.output.src}" />
+		<delete dir="${dir.output.stage}" />
+		<delete dir="${dir.output}/axis2-${service.name}.jar" />
+	</target>
+</project>

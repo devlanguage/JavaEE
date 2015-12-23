@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+	version="1.0">
+	<!--
+
+		<persistence-unit name="openjpa.jpa" transaction-type="RESOURCE_LOCAL">
+		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+		<mapping-file>META-INF/hello-orm.xml</mapping-file> <class>org.jpa.hello.BaseMessage</class>
+		<class>org.jpa.hello.HelloMessage</class> <properties> <property name="openjpa.ConnectionURL" value="jdbc:hsqldb:." />
+		<property name="openjpa.ConnectionDriverName" value="org.hsqldb.jdbcDriver" /> <property
+		name="openjpa.ConnectionUserName" value="ygong1" /> <property name="openjpa.ConnectionPassword" value="tellabs" />
+		</properties> </persistence-unit>
+	-->
+	<persistence-unit name="hibernate_account_unit" transaction-type="RESOURCE_LOCAL">
+		<description></description>
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<!--<jta-data-source>23</jta-data-source>
+		<non-jta-data-source></non-jta-data-source>
+		-->
+		<mapping-file>META-INF/many-to-many-orm.xml</mapping-file>
+		
+		<!-- Class to scan for annotations. It should be annotated with either 
+		  @Entity, @Embeddable or @MappedSuperclass. 
+		  exclude-unlisted-classes: some bugs in Hibernate3.2.6 needs be fixed for it
+    <jar-file></jar-file>
+		<class>org.ejbtest.account.persistence.inheritance.joined.Commodity</class>
+		<class>org.ejbtest.account.persistence.inheritance.joined.HomeAppliance</class>
+		<class>org.ejbtest.account.persistence.inheritance.joined.Washer</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+      -->
+		<properties>
+			<property name="hibernate.archive.autodetection" value="true" />
+
+			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />
+			<!--
+				<property name="hibernate.connection.driver_class" value="oracle.jdbc.OracleDriver" /> <property
+				name="hibernate.connection.username" value="ygong1" /> <property name="hibernate.connection.password" value="oracle"
+				/> <property name="hibernate.connection.url" value="jdbc:oracle:thin:@localhost:1521:ngx5500a" />
+			-->
+			<property name="hibernate.proxool.xml" value="proxool.xml" />
+			<property name="hibernate.proxool.pool_alias" value="NGX5500C" />
+
+			<!-- hibernate.hbm2ddl.auto: validate | update | create | create-drop  -->
+			<property name="hibernate.hbm2ddl.auto" value="validate" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.use_sql_comments" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.use_identifier_rollback" value="true" />
+			<!--
+				connection.release_mode:auto (default) | on_close | after_transaction | after_statement. "auto" will choose
+				after_statement for the JTA and CMT transaction strategies "after_transaction" for the JDBC transaction strategy.
+			-->
+			<property name="connection.release_mode" value="auto" />
+			<!--
+				TRANSACTION_NONE : 0; TRANSACTION_READ_UNCOMMITTED: 1; TRANSACTION_READ_COMMITTED : 2 TRANSACTION_REPEATABLE_READ :
+				4; TRANSACTION_SERIALIZABLE : 8
+			-->
+			<property name="hibernate.connection.isolation" value="2" />
+
+			<property name="hibernate.cache.use_query_cache" value="true" />
+			<property name="hibernate.cache.use_second_level_cache" value="true" />
+			<property name="hibernate.cache.region_prefix" value="hi_cache_region_prefix" />
+			<property name="hibernate.generate_statistics" value="true" />
+			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.HashtableCacheProvider" />
+		</properties>
+	</persistence-unit>
+</persistence>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="source/chat/chatroom/client/src"/>
+	<classpathentry kind="src" path="source/chat/chatroom/server/src"/>
+	<classpathentry kind="src" path="source/chat/common/src"/>
+	<classpathentry kind="src" path="source/chat/p2pchat/client/src"/>
+	<classpathentry kind="src" path="source/chat/p2pchat/server/src"/>
+	<classpathentry kind="src" path="config/src"/>
+	<classpathentry kind="src" path="source/uitest/src"/>
+	<classpathentry kind="lib" path="source/chat/thirdparty/activation-1.1.jar"/>
+	<classpathentry kind="lib" path="source/chat/thirdparty/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="source/chat/thirdparty/log4j-1.2.14.jar"/>
+	<classpathentry kind="lib" path="source/chat/thirdparty/mail-1.4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk165"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

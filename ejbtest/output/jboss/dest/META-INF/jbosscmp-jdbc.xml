@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+  <!DOCTYPE jbosscmp-jdbc PUBLIC
+      "-//JBoss//DTD JBOSSCMP-JDBC 3.0//EN"
+      "http://www.jboss.org/j2ee/dtd/jbosscmp-jdbc_3_0.dtd">
+<jbosscmp-jdbc>
+	<!-- The content of element type "defaults" must match "((datasource,datasource-mapping)?,create- 
+		table?,remove-table?,read-only?,read-time-out?,row-locking?,pk-constraint?,fk-constraint?,preferred- 
+		relation-mapping?,read-ahead?,list-cache-max?,fetch-size?)". -->
+	<defaults>
+		<datasource>java:DefaultDS</datasource>
+		<datasource-mapping>Oracle9i</datasource-mapping>
+		<create-table>true</create-table>
+		<remove-table>false</remove-table>
+		<read-only>false</read-only>
+		<fetch-size>3</fetch-size>
+	</defaults>
+	<enterprise-beans>
+		<entity>
+			<ejb-name>UserBean</ejb-name>
+			<table-name>ejb2_user</table-name>
+			<cmp-field>
+				<field-name>userId</field-name>
+				<column-name>user_id</column-name>
+			</cmp-field>
+			<cmp-field>
+				<field-name>email</field-name>
+				<column-name>email</column-name>
+				<jdbc-type>VARCHAR</jdbc-type>
+				<sql-type>VARCHAR2(100)</sql-type>
+			</cmp-field>
+			<cmp-field>
+				<field-name>password</field-name>
+				<column-name>password</column-name>
+			</cmp-field>
+		</entity>
+		<entity>
+			<ejb-name>UserInfoBean</ejb-name>
+			<table-name>ejb2_userinfo</table-name>
+			<cmp-field>
+				<field-name>firstName</field-name>
+				<column-name>password</column-name>
+			</cmp-field>
+			<cmp-field>
+				<field-name>middleName</field-name>
+				<column-name>middleName</column-name>
+			</cmp-field>
+			<cmp-field>
+				<field-name>lastName</field-name>
+				<column-name>lastName</column-name>
+			</cmp-field>
+			<cmp-field>
+				<field-name>email</field-name>
+				<column-name>email</column-name>
+			</cmp-field>
+			<cmp-field>
+				<field-name>dept</field-name>
+				<column-name>dept</column-name>
+			</cmp-field>
+			<cmp-field>
+				<field-name>workPhone</field-name>
+				<column-name>workPhone</column-name>
+			</cmp-field>
+			<cmp-field>
+				<field-name>extention</field-name>
+				<column-name>extention</column-name>
+			</cmp-field>
+			<cmp-field>
+				<field-name>homePhone</field-name>
+				<column-name>homePhone</column-name>
+			</cmp-field>
+
+		</entity>
+		<entity>
+			<ejb-name>RoleBean</ejb-name>
+			<create-table>true</create-table>
+			<table-name>ejb2_role</table-name>
+			<cmp-field>
+				<field-name>name</field-name>
+				<column-name>role_name</column-name>
+			</cmp-field>
+			<cmp-field>
+				<field-name>description</field-name>
+				<column-name>description</column-name>
+			</cmp-field>
+		</entity>
+	</enterprise-beans>
+</jbosscmp-jdbc>

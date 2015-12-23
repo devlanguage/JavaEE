@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd"
+    version="1.0">
+
+    <package>org.ejbtest.account.persistence.manytomany</package>
+    <!-- metadata-complete: 定义对于该元素是否全部使用元数据(换句话来说就是,如果注释出现在类级别应该考虑或者忽略).
+        access: PROPERTY(default, getter method), FIELD(java field)
+    --><!--
+        
+        <named-query name="getStudentsByNamingParam">
+        <query>
+        SELECT Object(hm) from org.jpa.manytomany.Student hm where hm.id>:id or hm.name=:name
+        </query>
+        </named-query>
+        <named-query name="getStudentsByPostionParam">
+        <query>
+        SELECT distinct Object(hm) from org.jpa.manytomany.Student hm where (hm.id>?1 or hm.id=?1)
+        and hm.name=?2
+        </query>
+        </named-query>
+        
+        <named-query name="listStudents">
+        <query>select object(f) from org.jpa.manytomany.Student f</query>
+        </named-query>
+        <named-native-query name="listStudents">
+        <query>select f.* from jpa_student f</query>
+        </named-native-query>
+    -->
+    <sql-result-set-mapping name="Student_Mapping">
+        <entity-result entity-class="org.ejbtest.account.persistence.manytomany.Student">
+            <field-result name="id" column="student_id" />
+            <field-result name="name" column="student_text" />
+            <field-result name="version" column="version" />
+        </entity-result>
+    </sql-result-set-mapping>
+
+
+    <entity class="org.ejbtest.account.persistence.manytomany.Student" >
+        <table name="ejb_relation_mtm_Student" />
+        <sequence-generator name="Student_Id_Sequence" sequence-name="EJB_SEQ_Student_Id" allocation-size="1" />
+        <attributes>
+            <id name="id">
+                <column name="student_id" column-definition="NUMBER(18)" nullable="false" />
+                <generated-value strategy="SEQUENCE" generator="Student_Id_Sequence" />
+            </id>
+            <basic name="name" fetch="EAGER" optional="true">
+                <column name="student_name" />
+            </basic>
+            <!--
+                <version name="version" >
+                <column name="version" />
+                </version>
+            --><!-- @ManyToMany(mappedBy = "students")  -->
+            <many-to-many name="teachers" mapped-by="students" fetch="EAGER"></many-to-many>
+
+        </attributes>
+    </entity>
+
+    <entity class="org.ejbtest.account.persistence.manytomany.Teacher">
+        <table name="ejb_relation_mtm_teacher">
+            <unique-constraint>
+                <column-name>thr_id</column-name>
+            </unique-constraint>
+        </table>
+        <sequence-generator name="Teacher_Id_Sequence" sequence-name="EJB_SEQ_Teacher_Id" />
+        <attributes>
+            <id name="id">
+                <column name="thr_id" />
+                <generated-value strategy="SEQUENCE" generator="Teacher_Id_Sequence" />
+            </id>
+            <basic name="professional">
+                <column name="teacher_professional" />
+            </basic>
+            <!--
+                @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY) @JoinTable(name =
+                "Teacher_Student", joinColumns = { @JoinColumn(name = "Teacher_ID", referencedColumnName
+                = "teacherid") }, inverseJoinColumns = { @JoinColumn(name = "Student_ID",
+                referencedColumnName = "studentid") })
+                
+            -->
+            <many-to-many name="students" fetch="EAGER">
+                <join-table name="EJB_RELATION_MTM_Teach_Stu">
+                    <join-column name="teacher_id" referenced-column-name="thr_id" />
+                    <inverse-join-column name="student_id" referenced-column-name="stu_id" />
+                </join-table>
+                <cascade>
+                    <cascade-all />
+                </cascade>
+            </many-to-many>            
+        </attributes>
+    </entity>
+</entity-mappings>

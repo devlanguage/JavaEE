@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="source/cxf2.2/helloworld/src/main"/>
+	<classpathentry kind="src" path="source/cxf2.2/helloworld/src/test"/>
+	<classpathentry kind="src" path="source/wsstyle/src"/>
+	<classpathentry kind="src" path="source/rest/src"/>
+	<classpathentry kind="src" path="source/cxf2.2/samples/java_first_spring_support/src"/>
+	<classpathentry kind="src" path="source/cxf2.2/samples/java_first_pojo/src"/>
+	<classpathentry kind="src" path="source/cxf2.2/samples/jms_queue/src"/>
+	<classpathentry kind="src" path="source/cxf2.2/samples/jms_queue/build/src"/>
+	<classpathentry excluding="demo/restful/client/JettyHTTPServerEngine_T.java" kind="src" path="source/cxf2.2/samples/restful_http_binding/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk159"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/activemq5"/>
+	<classpathentry kind="lib" path="G:/OpenSource/CommonJars/junit-4.4.jar"/>
+	<classpathentry kind="lib" path="tcpmon-1.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/cxf2.2"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

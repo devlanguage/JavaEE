@@ -1,0 +1,135 @@
+JPA比较罕见的应用 
+@Entity 
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) 
+@DiscriminatorColumn(name= "file_type") 
+@Table(name="t_file") 
+public abstract class FileParent implements Serializable{ 
+    @Id 
+    @TableGenerator(name="t_file_seq",allocationSize=1) 
+    @GeneratedValue(strategy=GenerationType.TABLE, generator="t_file_seq") 
+    private String id; 
+    
+  //getters/setters; 
+} 
+@Embeddable 
+public class FileHeader{ 
+  @Column(name="header_attr1") 
+  protected String headerAttr1; 
+  @Column(name="header_attr2") 
+  protected String headerAttr2; 
+  // getters/setters... 
+} 
+@Embedabble 
+public class FileBody{ 
+  
+} 
+@Entity 
+@DiscriminatorValue(value="0") 
+public class TypeAFile extends FileParent implements Serializable{ 
+  @Embedded 
+  private TypeAFileHeader fileHeader; 
+  @Embedded 
+  private TypeAFileBody fileBody; 
+  
+  public FileHeader getFileHeader(){ 
+    return this.fileHeader 
+  } 
+
+  public void setFileHeader(FileHeader fileHeader){ 
+    this.fileHeader = (TypeAFileHeader)fileHeader; 
+  } 
+
+  public FileBody getFileBody(){ 
+    return this.fileBody; 
+  } 
+
+  public void setFileBody(FileBody fileBody){ 
+    this.fileBody = (TypeAFileBody)fileBody; 
+  } 
+} 
+
+@Embeddable 
+public class TypeAFileHeader extends FileHeader{ 
+  @Column(name="header_attr1") 
+  public String getHeaderAttr1(){ 
+    return this.headerAttr1; 
+  } 
+  
+  public void setHeaderAttr1(String headerAttr1){ 
+    this.headerAttr1 = headerAttr1; 
+  } 
+
+  @Column(name="header_attr2") 
+  public String getHeaderAttr2(){ 
+    return this.headerAttr2; 
+  } 
+  
+  public void setHeaderAttr2(String headerAttr2){ 
+    this.headerAttr2 = headerAttr2; 
+  } 
+} 
+@Embedabble 
+public class TypeAFileBody{ 
+  @Column(name="type_a_body_attr1") 
+  private String typeAbodyAttr1; 
+  @Column(name="type_a_body_attr2") 
+  private String typeAbodyAttr2; 
+  // getters/setters... 
+} 
+
+@Entity 
+@DiscriminatorValue(value="1") 
+public class TypeBFile extends FileParent implements Serializable{ 
+  @Embedded 
+  private TypeBFileHeader fileHeader; 
+  @Embedded 
+  private TypeBFileBody fileBody; 
+  
+  public FileHeader getFileHeader(){ 
+    return this.fileHeader 
+  } 
+
+  public void setFileHeader(FileHeader fileHeader){ 
+    this.fileHeader = (TypeBFileHeader)fileHeader; 
+  } 
+
+  public FileBody getFileBody(){ 
+    return this.fileBody; 
+  } 
+
+  public void setFileBody(FileBody fileBody){ 
+    this.fileBody = (TypeBFileBody)fileBody; 
+  } 
+} 
+
+@Embeddable 
+public class TypeBFileHeader extends FileHeader{ 
+  @Column(name="header_attr1") 
+  public String getHeaderAttr1(){ 
+    return this.headerAttr1; 
+  } 
+  
+  public void setHeaderAttr1(String headerAttr1){ 
+    this.headerAttr1 = headerAttr1; 
+  } 
+
+  @Column(name="header_attr2") 
+  public String getHeaderAttr2(){ 
+    return this.headerAttr2; 
+  } 
+  
+  public void setHeaderAttr2(String headerAttr2){ 
+    this.headerAttr2 = headerAttr2; 
+  } 
+} 
+@Embedabble 
+public class TypeBFileBody{ 
+  @Column(name="type_a_body_attr1") 
+  private String typeBbodyAttr1; 
+  @Column(name="type_b_body_attr2") 
+  private String typeBbodyAttr2; 
+  @Column(name="type_b_body_attr3") 
+  private String typeBbodyAttr3; 
+  // getters/setters... 
+} 
+

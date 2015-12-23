@@ -1,0 +1,94 @@
+Axis2 comes with many new features, enhancements and industry specification implementations. The key features offered are as follows:
+
+    *  Speed - Axis2 uses its own object model and StAX (Streaming API for XML) parsing to achieve significantly greater speed than earlier versions of Apache Axis.
+    *  Low memory foot print- Axis2 was designed ground-up keeping low memory foot print in mind.
+    *  AXIOM - Axis2 comes with its own light-weight object model, AXIOM, for message processing which is extensible, highly performant and is developer convenient.
+    *  Hot Deployment - Axis2 is equipped with the capability of deploying Web services and handlers while the system is up and running. In other words, new services can be added to the system without having to shut down the server. Simply drop the required Web service archive into the services directory in the repository, and the deployment model will automatically deploy the service and make it available for use.
+    *  Asynchronous Web services - Axis2 now supports asynchronous Web services and asynchronous Web services invocation using non-blocking clients and transports.
+    *  MEP Support - Axis2 now comes handy with the flexibility to support Message Exchange Patterns (MEPs) with in-built support for basic MEPs defined in WSDL 2.0.
+    *  Flexibility - The Axis2 architecture gives the developer complete freedom to insert extensions into the engine for custom header processing, system management, and anything else you can imagine.
+    *  Stability - Axis2 defines a set of published interfaces which change relatively slowly compared to the rest of Axis.
+    *  Component-oriented Deployment - You can easily define reusable networks of Handlers to implement common patterns of processing for your applications, or to distribute to partners.
+    *  Transport Framework - We have a clean and simple abstraction for integrating and using Transports (i.e., senders and listeners for SOAP over various protocols such as SMTP, FTP, message-oriented middleware, etc), and the core of the engine is completely transport-independent.
+    *  WSDL support - Axis2 supports the Web Service Description Language, version 1.1 and 2.0, which allows you to easily build stubs to access remote services, and also to automatically export machine-readable descriptions of your deployed services from Axis2.
+    *  Add-ons - Several Web services specifications have been incorporated including WSS4J for security (Apache Rampart), Sandesha for reliable messaging, Kandula which is an encapsulation of WS-Coordination, WS-AtomicTransaction and WS-BusinessActivity.
+    *  Composition and Extensibility - Modules and phases improve support for composability and extensibility. Modules support composability and can also support new WS-* specifications in a simple and clean manner. They are however not hot deployable as they change the overall behavior of the system.
+
+Programming Model
+
+    * Improved, XML-centric client API including full WSDL and policy support
+    * Support for POJO and Spring services and clients
+    * Support for any message exchange pattern
+    * Synchronous and asynchronous calls
+    * Archived service deployment model supporting full service encapsulation with versioning support
+    * Archived module deployment model supporting controlled extensibility with versioning support
+    * Hot deployment
+    * WS-Policy driven code generation extensions
+    * Flexible service life cycle model
+    * Automatic support for POX (REST) style invocation of services
+    * Support for querying a service's WSDL (using ?wsdl), schema (using ?xsd) and policies (using ?policy)
+    * WSDL 2.0
+    * POJO annotation (JSR 181)
+    * JAX-WS intregration
+    * Custom Deployers
+    * Binary serialization (Fast Infoset)
+    * JSON support
+    * EJB Provider support
+
+Supported Specifications
+
+    * SOAP 1.1 and 1.2
+    * Message Transmission Optimization Mechanism (MTOM), XML Optimized Packaging (XOP) and SOAP with Attachments
+    * WSDL 1.1, including both SOAP and HTTP bindings
+    * WS-Addressing (submission and final)
+    * WS-Policy
+    * SAAJ 1.1
+
+Transports
+
+    * HTTP
+    * SMTP
+    * JMS
+    * TCP
+
+Supported Data Bindings
+
+    * Axis Data Binding (ADB)
+    * XMLBeans
+    * JibX
+    * JaxMe (Experimental)
+    * JaxBRI (Experimental)
+
+Extension Modules
+
+    * Apache Rampart: Supporting WS-Security (and soon WS-Policy)
+    * Apache Sandesha2: Supporting WS-Reliable Messaging
+
+(Apache Axis2 comes built in with a module that supports WS-Addressing.)
+Major Changes Since 1.2
+
+    * Moved to maven2 from maven1
+    * Significantly improved documentation
+    * Significantly improved support for POJO services and clients
+    * Significantly improved Deployment module and custom deployers
+    * Significantly improved support for Spring services
+    * Significantly improved Axis Data Binding (ADB) to increase schema coverage and overall stability
+    * Improved handler and module interfaces
+    * Improved Eclipse and Idea plugins
+    * Fixed tons of small and not-so-small bugs
+    * Major code cleanup and improved exception handling
+    * All the asynchronous MessageReceivers have been deprecated
+    * Deprecating the introspection to find init()/destroy() methods on service classes.
+    * Deprecated the Callback interface [http://wiki.apache.org/ws/FrontPage/Axis2/changesfrom1.2to1.3]
+    * Added a new phase called "Addressing" and moved all the addressing handlers into that phase
+    * Name of the wsdl2java generated Exception classes changed.
+    * Earlier it had the Exception suffix and from Axis2 1.3 it has been removed
+    * Interface changed in ADB Datasource class
+    * Classpath module loading support
+
+Known Issues and Limitations in 1.3 Release:
+
+    * Java2WSDL and runtime WSDL generation only support doc-lit/bare and doc-lit/wrapped
+    * Custom deployers only work in file system based repository.
+    * POJO does not support HasMap , Hastable and Vectors.
+    

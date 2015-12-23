@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<project name="HelloSelfService" default="deploy">
+
+	<property name="service.class.simplename" value="HelloPojoService" />
+	<!--property name="type.databinding" value="xmlbeans" /-->
+
+
+	<property name="dir.output.src" value="${dir.output}/src" />
+	<property name="dir.output.wsstub" value="${dir.output}/wsstub" />
+	<property name="dir.output.wsstub.wsdls" value="${dir.output.wsstub}/wsdls" />
+	<property name="dir.output.wsstub.resources" value="${dir.output.wsstub}/resources" />
+	<property name="dir.output.dest" value="${dir.output}/dest" />
+	<property name="dir.output.stage" value="${dir.output}/stage" />
+	<property name="dir.output.stage.meta-inf" value="${dir.output}/stage/META-INF" />
+	<property name="dir.deploy" value="${env.AXIS2_HOME}/repository/services" />
+	<property name="file.java2wsdl.result"
+	          value="${dir.output}/result-java2wsdl-${service.name}.txt" />
+	<property name="file.wsdl2java.result"
+	          value="${dir.output}/result-wsdl2java-${service.name}.txt" />
+	<property name="dir.subproject.resources" value="${service.resource.dir.name}" />
+
+
+	<!--
+	Inheritted Properties:
+		<echo message="${top}"/>           ../
+		<echo message="${service.name}"/>    helloself
+		<echo message="${service.target.namespace.prefix}"/>	http://axis2.basic.org/service/helloself
+		<echo message="${dir.output}"/>     output/helloself
+		<echo message="${dir.src.main}"/>   helloself/src/main
+		<echo message="${dir.src.test}"/>   helloself/src/test
+	-->
+	<property name="current" location="." />
+
+	<property name="service.class.package.prefix" value="${service.package.prefix}.service" />
+	<property name="service.stub.package.prefix" value="${service.package.prefix}.stub" />
+	<property name="service.wsdl.file.name" value="${service.class.simplename}.wsdl" />
+	<property name="service.class.fullname"
+	          value="${service.package.prefix}.service.${service.class.simplename}" />
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: init                      
+         - - - - - - - - - - - - - - - - - -->
+
+	<target name="init" depends="clean">
+
+		<mkdir dir="${dir.output.dest}" />
+		<mkdir dir="${dir.output.stage.meta-inf}" />
+		<mkdir dir="${dir.output.stage}/lib" />
+		<mkdir dir="${dir.output.wsstub.resources}" />
+		<copy todir="${dir.output.src}">
+			<fileset dir="${dir.src.main}" includes="**/**.*">
+			</fileset>
+		</copy>
+		<copy todir="${dir.output.stage}">
+			<fileset dir="${dir.src.main}" includes="**/**.*" excludes="**/*.java" />
+			<fileset dir="${dir.config}">
+				<patternset>
+					<include name="log4j.properties" />
+					<include name="common-logging.properties" />
+				</patternset>
+			</fileset>
+			<fileset dir="${dir.subproject.resources}" includes="**/*.*" />
+		</copy>
+		<copy todir="${dir.output.stage}/lib">
+			<fileset dir="${dir.lib.dependency}" includes="**/**.jar" />
+		</copy>
+	</target>
+	<!-- ================================= 
+          target: compile              
+         ================================= -->
+	<target name="compile" depends="init" description="--> description">
+		<javac destdir="${dir.output.dest}"
+		       srcdir="${dir.output.src}"
+		       classpathref="axis2.classes.compile">
+		</javac>
+		<copy todir="${dir.output.stage}">
+			<fileset dir="${dir.output.dest}" includes="**/*.class" />
+		</copy>
+	</target>
+
+	<!--generateAdbWsdl-->
+	<target name="generateWsdl" depends="compile">
+		<!--
+		%AXIS2_HOME%/bin/java2wsdl -cp . -cn org.basic.axis2.helloself.service.HelloSelfService -of HelloSelfService.wsdl
+		-->
+		<echo message="Namespace=${service.target.namespace.prefix}" />
+		<exec executable="cmd.exe" dir="${dir.axis2.bin}" output="${file.java2wsdl.result}">
+			<arg line="/c java2wsdl.bat" />
+			<arg line='-cp "${dir.output.dest}"' />
+			<arg line='-cp "${dir.output.dest.common}"' />
+			<arg line='-cn "${service.class.fullname}"' />
+			<arg line="-stn ${service.target.namespace.prefix}" />
+			<arg line="-tn  ${service.target.namespace.prefix}" />
+			<arg line="-p2n ${service.class.package.prefix},${service.target.namespace.prefix}" />
+			<arg line="-o ${dir.output.wsstub.wsdls}" />
+			<arg line="-of ${service.wsdl.file.name}" />
+		</exec>
+		<echo message="Generated the WSDL file: ${dir.output.wsstub.wsdls}/${service.wsdl.file.name}" />
+	</target>
+
+
+	<!-- ================================= 
+          target: package              
+         ================================= -->
+	<target name="package" description="--> description">
+		<copy todir="${dir.output.stage}">
+			<fileset dir="${dir.output.dest}" includes="**/*.class" />
+		</copy>
+		<copy todir="${dir.output.stage.meta-inf}">
+			<fileset dir="${dir.output.wsstub.resources}" includes="**/*.*" />
+			<fileset dir="${dir.output.wsstub.wsdls}" includes="**/*.*" />
+		</copy>
+
+		<jar destfile="${dir.output}/${service.name}.aar">
+			<fileset dir="${dir.output.stage}" includes="**/*.*" />
+		</jar>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+    target: rebuild                      
+   - - - - - - - - - - - - - - - - - -->
+	<target name="rebuild" depends="generateWsdl">
+		<!--copy todir="${dir.deploy}" file="${dir.output}/${service.name}.aar" overwrite="true" /-->
+		<echo message="Service ${service.class.fullname} has built successfully" />
+	</target>
+	<!-- - - - - - - - - - - - - - - - - - 
+    target: deploy                      
+   - - - - - - - - - - - - - - - - - -->
+	<target name="deploy" depends="package">
+		<copy todir="${dir.deploy}" file="${dir.output}/${service.name}.aar" overwrite="true" />
+		<echo message="Service ${service.class.fullname} has deployed successfully in the directory ${dir.output}" />
+	</target>
+	<target name="clean" description="--> description">
+		<delete dir="${dir.output.dest}" />
+		<delete dir="${dir.output.src}" />
+		<delete dir="${dir.output.stage}" />
+		<delete dir="${dir.output.wsstub}" />
+		<delete dir="${dir.output}/${app.name}.aar" />
+	</target>
+</project>
